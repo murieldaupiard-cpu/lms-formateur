@@ -1,6 +1,8 @@
 "use client";
 import {useState} from "react";
 
+type Step=1|2|3|4;
+
 const toolsList=[
  ["01","Cours","Créez vos contenus pédagogiques à partir de maquettes modulables.","6 MAQUETTES"],
  ["02","Quiz","Importez toutes vos questions en une fois, vérifiez puis publiez.","IMPORT EN LOT"],
@@ -16,6 +18,10 @@ const formations=[
 ];
 export default function Home(){
  const [view,setView]=useState<"home"|"create">("home");
+ const [step,setStep]=useState<Step>(1);
+ const [title,setTitle]=useState("");
+ const [description,setDescription]=useState("");
+ const [selectedColor,setSelectedColor]=useState(palette[0]);
  return <main className="studio">
   <header className="studio-nav">
    <button className="studio-brand" onClick={()=>setView("home")}><span>S</span><div><strong>STUDIO</strong><small>LMS FORMATEUR</small></div></button>
@@ -24,7 +30,7 @@ export default function Home(){
   {view==="home"?<>
    <section className="studio-heading">
     <div><span>CRÉATION PÉDAGOGIQUE</span><h1>Votre espace formateur</h1><p>Construisez vos formations, organisez vos ressources et suivez vos apprenants.</p></div>
-    <button className="create-main" onClick={()=>setView("create")}>＋ CRÉER UNE FORMATION <b>→</b></button>
+    <button className="create-main" onClick={()=>{setStep(1);setView("create")}}>＋ CRÉER UNE FORMATION <b>→</b></button>
    </section>
    <section className="studio-list">
     <div className="list-title"><div><span>VOS FORMATIONS</span><h2>Construire et piloter</h2></div><small>3 ESPACES DISPONIBLES</small></div>
@@ -34,10 +40,12 @@ export default function Home(){
    </section>
   </>:<section className="creator-page">
     <div className="creator-head"><div><span>CRÉER UNE FORMATION</span><h1>Construisez votre parcours</h1><p>Commencez par les informations générales, puis organisez vos modules et vos ressources.</p></div><button className="home-pill" onClick={()=>setView("home")}>← MENU PRINCIPAL</button></div>
-    <div className="creation-row"><span className="row-num">01</span><div><small>ÉTAPE 1</small><h3>Informations</h3><p>Titre, description et objectifs de la formation.</p></div><b>→</b></div>
-    <div className="creation-row"><span className="row-num">02</span><div className="palette-step"><small>ÉTAPE 2</small><h3>Couleur & identité</h3><p>Choisissez une couleur vibrante pour identifier votre formation.</p><div className="palette">${palette.map((color,i)=><button key={color} className="swatch" style={{background:color}} aria-label={`Couleur ${i+1}`} title={color}/>)}</div></div><b>→</b></div>
-    <div className="creation-row"><span className="row-num">03</span><div><small>ÉTAPE 3</small><h3>Ressources & activités</h3><p>Ajoutez cours, quiz, Casino Game, Time’s Up et questionnaires.</p></div><b>→</b></div>
-    <div className="creation-row"><span className="row-num">04</span><div><small>ÉTAPE 4</small><h3>Aperçu & publication</h3><p>Vérifiez le rendu apprenant avant de publier.</p></div><b>→</b></div>
+    <div className="creator-workspace">
+      <div className={"creation-row "+(step===1?"active-step":"")} onClick={()=>setStep(1)}><span className="row-num">01</span><div className="palette-step"><small>ÉTAPE 1</small><h3>Informations</h3><p>Titre, description et objectifs de la formation.</p>{step===1&&<div className="step-form" onClick={e=>e.stopPropagation()}><label>Nom de la formation<input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Ex. Anglais professionnel"/></label><label>Description<textarea value={description} onChange={e=>setDescription(e.target.value)} placeholder="Décrivez brièvement la formation"/></label><button type="button" className="next-step" onClick={()=>setStep(2)}>CONTINUER →</button></div>}</div><b>→</b></div>
+      <div className={"creation-row "+(step===2?"active-step":"")} onClick={()=>setStep(2)}><span className="row-num">02</span><div className="palette-step"><small>ÉTAPE 2</small><h3>Couleur & identité</h3><p>Choisissez une couleur vibrante pour identifier votre formation.</p>{step===2&&<div className="palette" onClick={e=>e.stopPropagation()}>{palette.map((color,i)=><button type="button" key={color} className={"swatch "+(selectedColor===color?"selected":"")} style={{background:color}} onClick={()=>setSelectedColor(color)} aria-label={`Couleur ${i+1}`} title={color}/>)}</div>}</div><b>→</b></div>
+      <div className={"creation-row "+(step===3?"active-step":"")} onClick={()=>setStep(3)}><span className="row-num">03</span><div><small>ÉTAPE 3</small><h3>Ressources & activités</h3><p>Ajoutez cours, quiz, Casino Game, Time’s Up et questionnaires.</p></div><b>→</b></div>
+      <div className={"creation-row "+(step===4?"active-step":"")} onClick={()=>setStep(4)}><span className="row-num">04</span><div><small>ÉTAPE 4</small><h3>Aperçu & publication</h3><p>Vérifiez le rendu apprenant avant de publier.</p></div><b>→</b></div>
+    </div>
    </section>}
   <footer><div className="studio-brand compact"><span>S</span><div><strong>STUDIO</strong><small>LMS FORMATEUR</small></div></div><small>CREATED BY <b>ALEXANDRE AND MURIEL</b></small></footer>
  </main>
