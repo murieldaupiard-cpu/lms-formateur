@@ -43,7 +43,6 @@ export default function Home(){
   {view==="published"?<section className="published-page"><div className="published-card"><span>FORMATION PUBLIÉE</span><div className="success-mark">✓</div><h1>{title||"Votre formation"}</h1><p>La formation est maintenant publiée dans ce prototype. Vous pouvez revenir à l’espace formateur ou continuer à la modifier.</p><div><button className="secondary-step" onClick={()=>{setView("create");setStep(3)}}>MODIFIER</button><button className="next-step" onClick={()=>setView("home")}>RETOUR À L’ESPACE FORMATEUR →</button></div></div></section>:view==="home"?<>
    <section className="studio-heading">
     <div><span>CRÉATION PÉDAGOGIQUE</span><h1>Votre espace formateur</h1><p>Construisez vos formations, organisez vos ressources et suivez vos apprenants.</p></div>
-    <button className="create-main" onClick={()=>{setStep(1);setView("create")}}>＋ CRÉER UNE FORMATION <b>→</b></button>
    </section>
    <section className="studio-list">
     <div className="list-title"><div><span>ESPACE FORMATEUR</span><h2>Créer et suivre</h2></div><small>3 RUBRIQUES</small></div>
