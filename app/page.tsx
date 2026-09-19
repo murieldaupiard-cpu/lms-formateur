@@ -11,13 +11,20 @@ const toolsList=[
  ["05","Questionnaire","Créez vos questionnaires de satisfaction multi-formats.","SATISFACTION"]
 ];
 const palette=["#7C3AED","#9333EA","#C026D3","#E11D48","#F43F5E","#F97316","#F59E0B","#EAB308","#84CC16","#22C55E","#10B981","#14B8A6","#06B6D4","#0EA5E9","#3B82F6","#2563EB","#4F46E5","#6366F1","#EC4899","#D946EF"];
+const templates=[
+ ["alphabet","MODULE 01","Alphabet & Spelling","Titre + texte","Structure éditoriale avec bannière, contenu principal et activités."],
+ ["numbers","MODULE 02","Numbers & Speaking","Deux colonnes","Deux zones de contenu pour explication, exemples et pratique."],
+ ["symbols","MODULE 03","Symbols & Special Characters","Étapes","Progression guidée en plusieurs étapes pédagogiques."],
+ ["dates","MODULE 04","Dates & Speaking","Cartes","Contenus courts organisés sous forme de cartes pédagogiques."],
+ ["time","MODULE 05","Time & Telling the Time","Image + texte","Support visuel accompagné d’explications et d’activités."]
+];
 const formations=[
  ["01","Ma première formation","Construisez votre parcours par modules et chapitres, puis ajoutez cours et activités.","BROUILLON"],
  ["02","Modèles de formation","Réutilisez vos structures et ressources pour créer plus rapidement.","BIBLIOTHÈQUE"],
  ["03","Résultats & suivi","Consultez les scores, tentatives, réponses et retours des apprenants.","SUIVI"]
 ];
 export default function Home(){
- const [view,setView]=useState<"home"|"create">("home");
+ const [view,setView]=useState<"home"|"create"|"templates">("home");
  const [step,setStep]=useState<Step>(1);
  const [title,setTitle]=useState("");
  const [description,setDescription]=useState("");
@@ -34,11 +41,11 @@ export default function Home(){
    </section>
    <section className="studio-list">
     <div className="list-title"><div><span>VOS FORMATIONS</span><h2>Construire et piloter</h2></div><small>3 ESPACES DISPONIBLES</small></div>
-    {formations.map(x=><button className="studio-row" key={x[0]} onClick={()=>x[0]==="01"&&setView("create")}><span className="row-num">{x[0]}</span><div className="row-body"><div><h3>{x[1]}</h3><span>{x[3]}</span></div><p>{x[2]}</p></div><b className="row-arrow">→</b></button>)}
+    {formations.map(x=><button className="studio-row" key={x[0]} onClick={()=>x[0]==="01"?setView("create"):x[0]==="02"?setView("templates"):undefined}><span className="row-num">{x[0]}</span><div className="row-body"><div><h3>{x[1]}</h3><span>{x[3]}</span></div><p>{x[2]}</p></div><b className="row-arrow">→</b></button>)}
     <div className="list-title tools-title"><div><span>OUTILS DE CRÉATION</span><h2>Que souhaitez-vous créer ?</h2></div><small>5 TYPES DE RESSOURCES</small></div>
     {toolsList.map(x=><button className="studio-row tool-row" key={x[0]} onClick={()=>setView("create")}><span className="row-num">{x[0]}</span><div className="row-body"><div><h3>{x[1]}</h3><span>{x[3]}</span></div><p>{x[2]}</p></div><b className="row-arrow">→</b></button>)}
    </section>
-  </>:<section className="creator-page">
+  </>:view==="templates"?<section className="template-page"><div className="creator-head"><div><span>BIBLIOTHÈQUE DE MODÈLES</span><h1>Modèles de formation</h1><p>Choisissez une structure inspirée des modules déjà conçus dans votre LMS apprenant, puis adaptez-la à votre contenu.</p></div><button className="home-pill" onClick={()=>setView("home")}>← MENU PRINCIPAL</button></div><div className="template-heading"><div><span>MODÈLES PÉDAGOGIQUES</span><h2>Choisissez votre mise en page</h2></div><small>5 MODÈLES DISPONIBLES</small></div><div className="template-grid">{templates.map((t,i)=><button key={t[0]} className={`template-card ${t[0]}`} onClick={()=>{setTitle(t[2]);setSelectedColor(palette[i]);setStep(1);setView("create")}}><div className="template-visual"><div className="template-top"><b>{t[1]}</b><span>MODÈLE</span></div><h3>{t[2]}</h3><small>UTILISER CE MODÈLE ↗</small><i/><em/></div><div className="template-info"><b>{t[3]}</b><p>{t[4]}</p><div><span>PERSONNALISER</span><strong>→</strong></div></div></button>)}</div></section>:<section className="creator-page">
     <div className="creator-head"><div><span>CRÉER UNE FORMATION</span><h1>Construisez votre parcours</h1><p>Définissez l’action de formation, puis structurez la progression pédagogique, les séquences, les activités d’apprentissage et les ressources.</p></div><button className="home-pill" onClick={()=>setView("home")}>← MENU PRINCIPAL</button></div>
     <div className="creator-workspace">
       <div className={"creation-row "+(step===1?"active-step":"")} onClick={()=>setStep(1)}><span className="row-num">01</span><div className="palette-step"><small>ÉTAPE 1</small><h3>Informations</h3><p>Intitulé, description et objectifs pédagogiques.</p>{step===1&&<div className="step-form" onClick={e=>e.stopPropagation()}><label>Nom de la formation<input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Ex. Anglais professionnel"/></label><label>Description<textarea value={description} onChange={e=>setDescription(e.target.value)} placeholder="Décrivez brièvement la formation"/></label><button type="button" className="next-step" onClick={()=>setStep(2)}>CONTINUER →</button></div>}</div><b>→</b></div>
