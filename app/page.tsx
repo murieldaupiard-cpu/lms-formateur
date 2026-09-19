@@ -19,9 +19,9 @@ const templates=[
  ["time","MODULE 05","Time & Telling the Time","Image + texte","Support visuel accompagné d’explications et d’activités."]
 ];
 const formations=[
- ["01","Ma première formation","Construisez votre parcours par modules et chapitres, puis ajoutez cours et activités.","BROUILLON"],
- ["02","Modèles de formation","Réutilisez vos structures et ressources pour créer plus rapidement.","BIBLIOTHÈQUE"],
- ["03","Résultats & suivi","Consultez les scores, tentatives, réponses et retours des apprenants.","SUIVI"]
+ ["01","Créer une formation","Construisez une nouvelle formation et organisez son parcours pédagogique.","CRÉATION"],
+ ["02","Modèles de formation","Partez d’une structure prête à personnaliser pour créer plus rapidement.","BIBLIOTHÈQUE"],
+ ["03","Outils de suivi","Suivez la progression, les résultats, les évaluations et les retours des apprenants.","SUIVI"]
 ];
 export default function Home(){
  const [view,setView]=useState<"home"|"create"|"templates"|"published">("home");
@@ -46,10 +46,8 @@ export default function Home(){
     <button className="create-main" onClick={()=>{setStep(1);setView("create")}}>＋ CRÉER UNE FORMATION <b>→</b></button>
    </section>
    <section className="studio-list">
-    <div className="list-title"><div><span>VOS FORMATIONS</span><h2>Construire et piloter</h2></div><small>3 ESPACES DISPONIBLES</small></div>
+    <div className="list-title"><div><span>ESPACE FORMATEUR</span><h2>Créer et suivre</h2></div><small>3 RUBRIQUES</small></div>
     {formations.map(x=><button className="studio-row" key={x[0]} onClick={()=>x[0]==="01"?setView("create"):x[0]==="02"?setView("templates"):undefined}><span className="row-num">{x[0]}</span><div className="row-body"><div><h3>{x[1]}</h3><span>{x[3]}</span></div><p>{x[2]}</p></div><b className="row-arrow">→</b></button>)}
-    <div className="list-title tools-title"><div><span>OUTILS DE CRÉATION</span><h2>Que souhaitez-vous créer ?</h2></div><small>5 TYPES DE RESSOURCES</small></div>
-    {toolsList.map(x=><button className="studio-row tool-row" key={x[0]} onClick={()=>setView("create")}><span className="row-num">{x[0]}</span><div className="row-body"><div><h3>{x[1]}</h3><span>{x[3]}</span></div><p>{x[2]}</p></div><b className="row-arrow">→</b></button>)}
    </section>
   </>:view==="templates"?<section className="template-page"><div className="creator-head"><div><span>BIBLIOTHÈQUE DE MODÈLES</span><h1>Modèles de formation</h1><p>Choisissez une structure inspirée des modules déjà conçus dans votre LMS apprenant, puis adaptez-la à votre contenu.</p></div><button className="home-pill" onClick={()=>setView("home")}>← MENU PRINCIPAL</button></div><div className="template-heading"><div><span>MODÈLES PÉDAGOGIQUES</span><h2>Choisissez votre mise en page</h2></div><small>5 MODÈLES DISPONIBLES</small></div><div className="template-grid">{templates.map((t,i)=><button key={t[0]} className={`template-card ${t[0]}`} onClick={()=>{setSelectedColor(palette[i]);setStep(1);setView("create")}}><div className="template-visual"><div className="template-top"><b>{t[1]}</b><span>MODÈLE</span></div><small>UTILISER CE MODÈLE ↗</small><i/><em/></div><div className="template-info"><b>{t[3]}</b><p>{t[4]}</p><div><span>PERSONNALISER</span><strong>→</strong></div></div></button>)}</div></section>:<section className="creator-page">
     <div className="creator-head"><div><span>CRÉER UNE FORMATION</span><h1>Construisez votre parcours</h1><p>Définissez l’action de formation, puis structurez la progression pédagogique, les séquences, les activités d’apprentissage et les ressources.</p></div><button className="home-pill" onClick={()=>setView("home")}>← MENU PRINCIPAL</button></div>
