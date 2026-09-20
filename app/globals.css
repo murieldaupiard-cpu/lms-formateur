@@ -112,3 +112,6 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 .creation-row.active-step .learner-module-top{display:block!important;min-height:205px!important}
 .creation-row.active-step .learner-module-bottom{display:flex!important;min-height:125px!important}
 @media(max-width:850px){.creation-row.active-step .learner-modules-head{grid-template-columns:1fr!important}.creation-row.active-step .learner-modules-head>b{margin-top:14px;justify-self:start}.creation-row.active-step .learner-modules-grid{grid-template-columns:minmax(0,1fr)!important}}
+
+/* Autosave status */
+.autosave-indicator{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:0 0 12px;color:#829aaf;font-size:11px;font-weight:700;letter-spacing:.04em}.autosave-indicator span{width:7px;height:7px;border-radius:50%;background:#45d39b;box-shadow:0 0 8px rgba(69,211,155,.35)}.autosave-indicator span.saving{background:#f0c75e;animation:autosavePulse .8s ease-in-out infinite}@keyframes autosavePulse{50%{opacity:.35;transform:scale(.8)}}
