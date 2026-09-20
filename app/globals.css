@@ -140,3 +140,21 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 .compose-launch{margin:18px 0;padding:24px;border:1px solid color-mix(in srgb,var(--seq) 55%,#36536d);border-radius:16px;background:linear-gradient(135deg,#0a2034,#07182a);text-align:center}.compose-launch small{color:var(--seq);font-size:9px;font-weight:900;letter-spacing:.15em}.compose-launch h4{margin:9px 0 6px;color:#fff;font-family:Georgia,serif;font-size:20px}.compose-launch p{margin:0 auto 18px!important;max-width:650px;color:#91a8ba!important}.compose-launch .next-step{min-width:250px}.composed-text{margin-top:14px;padding:16px;border-left:3px solid var(--seq);background:#0a2034;color:#c6d5df;white-space:pre-wrap}
 
 .composition-ready{scroll-margin-top:100px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin:24px 0 12px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--seq) 65%,#36536d);border-radius:12px;background:color-mix(in srgb,var(--seq) 13%,#07182a);animation:compositionIn .35s ease}.composition-ready small{color:var(--seq);font-size:9px;font-weight:900;letter-spacing:.14em}.composition-ready strong{color:#fff;font-size:12px}.compose-launch button:disabled{opacity:.65;cursor:wait}@keyframes compositionIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+
+/* Learner hierarchy: competence -> sequence -> objective */
+.learner-path-head,.learner-modules-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin:12px 0 34px}
+.learner-path-head small,.learner-modules-head small,.objective-learner-hero small{color:#72c9ff;font-size:10px;font-weight:900;letter-spacing:.18em}
+.learner-path-head h1,.learner-modules-head h1,.objective-learner-hero h1{font:400 clamp(38px,5vw,64px) Georgia,serif;margin:10px 0}
+.learner-path-head p,.learner-modules-head p{color:#9db0c2;margin:0}
+.learner-path-head>b,.learner-modules-head>b{color:#72c9ff;border-bottom:4px solid #72c9ff;padding:0 34px 12px;font-size:10px;letter-spacing:.18em;white-space:nowrap}
+.learner-path-list{display:grid;gap:16px}
+.learner-path-row{width:100%;display:grid;grid-template-columns:64px 1fr auto 28px;align-items:center;gap:22px;text-align:left;background:#0d2338;border:1px solid #2b4861;border-radius:17px;padding:24px 28px;color:#fff;cursor:pointer}
+.learner-path-row>span{width:58px;height:58px;border:1px solid #36546f;border-radius:13px;display:grid;place-items:center;color:#f6bd22;font:600 21px Georgia,serif}
+.learner-path-row h2{font:600 24px Georgia,serif;margin:0 0 6px}.learner-path-row p{margin:0 0 8px;color:#a6b6c6}.learner-path-row small{color:#7f94a8;font-size:9px;font-weight:900;letter-spacing:.14em}.learner-path-row em{font-style:normal;font-size:9px;font-weight:900;color:#f6bd22;background:#f6bd2215;padding:8px 14px;border-radius:20px}.learner-path-row>b{color:#f6bd22;font-size:24px}
+.learner-back{border:1px solid #38536d;background:transparent;color:#b8c7d4;border-radius:9px;padding:11px 15px;font-size:9px;font-weight:900;cursor:pointer;margin-bottom:28px}
+.learner-modules-grid button.learner-module-card{appearance:none;text-align:left;color:inherit;cursor:pointer;width:100%;border:1px solid #29445e}
+.objective-learner-hero{margin-top:10px;padding:42px;border:1px solid color-mix(in srgb,var(--seq) 60%,#29445e);border-radius:20px;background:linear-gradient(135deg,color-mix(in srgb,var(--seq) 22%,#071528),#0b2134)}
+.objective-learner-hero p{max-width:800px;color:#c2cfda;line-height:1.75}
+.objective-program{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}.objective-program button{display:grid;grid-template-columns:38px 1fr 24px;gap:12px;align-items:center;text-align:left;background:#0d2338;border:1px solid #2b4861;color:#fff;border-radius:14px;padding:18px;cursor:pointer}.objective-program span{font-size:18px;font-weight:900;color:var(--seq,#72c9ff)}.objective-program h3{margin:0 0 5px}.objective-program p{margin:0;color:#93a7b9}.objective-program b{font-size:20px;color:var(--seq,#72c9ff)}
+@media(max-width:800px){.learner-path-head,.learner-modules-head{align-items:flex-start;flex-direction:column}.learner-path-row{grid-template-columns:52px 1fr 24px}.learner-path-row em{display:none}.objective-program{grid-template-columns:1fr}}
