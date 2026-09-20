@@ -142,3 +142,4 @@ export default function Home(){
   <footer><div className="studio-brand compact"><span className="am-logo" aria-label="AM"><img src="/icon.svg" alt="AM"/></span><div><strong>STUDIO</strong><small>LMS FORMATEUR</small></div></div><small>CREATED BY <b>ALEXANDRE AND MURIEL</b></small></footer>
  </main>
 }
+
