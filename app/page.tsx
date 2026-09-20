@@ -1,4 +1,5 @@
 "use client";
+/* deploy sync */
 import {useEffect,useState} from "react";
 
 type Step=1|2|3|4|5;
