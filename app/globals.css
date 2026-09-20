@@ -27,3 +27,5 @@
 .studio-brand .am-brand{font-family:cursive;font-style:italic;font-size:30px;font-weight:600;color:#d4af37;border-color:#d4af37;letter-spacing:-4px;text-shadow:0 0 10px rgba(212,175,55,.22)}.studio-brand.compact .am-brand{font-size:20px;letter-spacing:-3px}
 
 .studio-brand .am-logo{width:96px;height:96px;display:grid;place-items:center;border:0!important;background:transparent!important}.studio-brand .am-logo svg{width:100%;height:100%;overflow:visible}.studio-brand .am-logo circle{fill:none;stroke:#d4af37;stroke-width:2.2;filter:drop-shadow(0 0 3px rgba(212,175,55,.35))}.studio-brand .am-logo text{fill:#e5bd4f;font-family:"Brush Script MT","Segoe Script",cursive;font-size:35px;font-style:italic;font-weight:600;letter-spacing:-5px;filter:drop-shadow(0 0 2px rgba(212,175,55,.35))}.studio-brand.compact .am-logo{width:48px;height:48px}.studio-brand.compact .am-logo text{font-size:35px}
+
+.studio-brand .am-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}.studio-brand .am-logo{overflow:hidden;border-radius:50%}
