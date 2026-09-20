@@ -29,3 +29,14 @@
 .studio-brand .am-logo{width:96px;height:96px;display:grid;place-items:center;border:0!important;background:transparent!important}.studio-brand .am-logo svg{width:100%;height:100%;overflow:visible}.studio-brand .am-logo circle{fill:none;stroke:#d4af37;stroke-width:2.2;filter:drop-shadow(0 0 3px rgba(212,175,55,.35))}.studio-brand .am-logo text{fill:#e5bd4f;font-family:"Brush Script MT","Segoe Script",cursive;font-size:35px;font-style:italic;font-weight:600;letter-spacing:-5px;filter:drop-shadow(0 0 2px rgba(212,175,55,.35))}.studio-brand.compact .am-logo{width:48px;height:48px}.studio-brand.compact .am-logo text{font-size:35px}
 
 .studio-brand .am-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}.studio-brand .am-logo{overflow:hidden;border-radius:50%}
+
+/* Animated gold aura around the AM mark */
+.studio-brand .am-logo{position:relative;isolation:isolate}
+.studio-brand .am-logo::before,.studio-brand .am-logo::after{content:"";position:absolute;inset:7%;border-radius:50%;pointer-events:none;z-index:-1}
+.studio-brand .am-logo::before{box-shadow:0 0 7px rgba(255,207,82,.55),0 0 18px rgba(212,175,55,.38),0 0 32px rgba(212,175,55,.16);animation:amGoldPulse 2.8s ease-in-out infinite}
+.studio-brand .am-logo::after{inset:-4%;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,244,184,.9) 78%,rgba(255,190,55,.48) 83%,transparent 90%);filter:blur(5px);opacity:.8;animation:amGoldSweep 4.8s linear infinite}
+.studio-brand .am-logo img{position:relative;z-index:1;filter:drop-shadow(0 0 2px rgba(255,222,120,.45));animation:amImageGlow 2.8s ease-in-out infinite}
+@keyframes amGoldPulse{0%,100%{transform:scale(.98);opacity:.55}50%{transform:scale(1.045);opacity:1}}
+@keyframes amGoldSweep{to{transform:rotate(360deg)}}
+@keyframes amImageGlow{0%,100%{filter:drop-shadow(0 0 2px rgba(255,222,120,.35))}50%{filter:drop-shadow(0 0 7px rgba(255,215,90,.8))}}
+@media (prefers-reduced-motion:reduce){.studio-brand .am-logo::before,.studio-brand .am-logo::after,.studio-brand .am-logo img{animation:none}}
