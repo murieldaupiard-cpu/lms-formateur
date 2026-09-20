@@ -95,3 +95,6 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 .sequence-themed-content>small,.sequence-themed-content h4{color:var(--seq)!important}
 .sequence-themed-content .mock-content :is(b,i){border-color:var(--seq)!important}
 .sequence-themed-content .mock-content b{color:var(--seq)!important}
+
+/* Explicit sequence > objective > content workflow */
+.objective-card{margin:16px 0;padding:22px;border:1px solid #35536d;border-radius:14px;background:#0a2034}.objective-card small{display:block;font-size:10px;letter-spacing:.14em;font-weight:900;margin-bottom:10px}.objective-card strong{display:block;font-size:18px;color:#f4f8fb}.edit-competency-actions{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0 30px}.edit-competency-actions button{padding:24px;text-align:left;border:1px solid #35536d;border-radius:16px;background:#0b2034;color:#fff}.edit-competency-actions button b{display:block;color:#f0c75e;font-size:14px;margin-bottom:8px}.edit-competency-actions button span{color:#91a9bd;font-size:13px}.edit-competency-actions button:hover{border-color:#f0c75e!important;background:#102b45!important;transform:translateY(-3px)!important;box-shadow:0 12px 30px rgba(212,175,55,.12)!important}@media(max-width:700px){.edit-competency-actions{grid-template-columns:1fr}}
