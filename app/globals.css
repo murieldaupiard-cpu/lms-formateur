@@ -52,3 +52,16 @@
 
 /* Showcase welcome */
 .showcase-auth{position:relative}.showcase-auth .demo-primary{margin-top:8px;background:linear-gradient(90deg,#f0c75e,#d4af37);color:#071528;font-weight:800}.showcase-auth .account-access{border:1px solid #36536d!important;border-radius:10px;padding:14px!important;text-align:center!important}.showcase-note{display:block;text-align:center;color:#708aa2;letter-spacing:.08em;margin-top:4px}.showcase-auth input{font-size:16px}
+
+/* Global interaction language — every clickable element visibly responds */
+:where(button,a,[role="button"],input[type="button"],input[type="submit"],input[type="file"]::file-selector-button,select,label[for],.formation-row,.tool-card,.template-card,.publication-card){transition:transform .24s cubic-bezier(.2,.8,.2,1),box-shadow .24s ease,border-color .24s ease,background-color .24s ease,color .24s ease,opacity .24s ease;cursor:pointer}
+:where(button,a,[role="button"],input[type="button"],input[type="submit"],label[for]):not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.1)}
+:where(button,a,[role="button"],input[type="button"],input[type="submit"],label[for]):not(:disabled):active{transform:translateY(0) scale(.975);transition-duration:.08s}
+:where(button,a,[role="button"],input[type="button"],input[type="submit"],select):focus-visible{outline:2px solid #f0c75e;outline-offset:3px}
+button:not(:disabled):hover,.primary:hover,.next-step:hover,.home-pill:hover,.logout-btn:hover{box-shadow:0 8px 24px rgba(0,0,0,.24),0 0 0 1px rgba(240,199,94,.2)}
+a:hover{text-decoration-color:currentColor}
+.formation-row:hover,.tool-card:hover,.template-card:hover,.publication-card:hover{transform:translateY(-4px);border-color:#547493!important;box-shadow:0 14px 34px rgba(0,0,0,.22)}
+.formation-row:hover :is(h2,h3,strong),.tool-card:hover :is(h2,h3,strong),.template-card:hover :is(h2,h3,strong){color:#f0c75e}
+input[type="file"]::file-selector-button{cursor:pointer}
+input[type="file"]::file-selector-button:hover{filter:brightness(1.12)}
+button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
