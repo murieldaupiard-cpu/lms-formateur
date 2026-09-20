@@ -65,3 +65,12 @@ a:hover{text-decoration-color:currentColor}
 input[type="file"]::file-selector-button{cursor:pointer}
 input[type="file"]::file-selector-button:hover{filter:brightness(1.12)}
 button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
+
+/* Billing: explicit hover states (overrides legacy billing link styles) */
+.billing-grid a{position:relative;display:inline-flex!important;align-items:center;gap:9px;transform:translateY(0);transition:transform .28s cubic-bezier(.2,.8,.2,1),background .28s ease,color .28s ease,border-color .28s ease,box-shadow .28s ease!important}
+.billing-grid a::after{content:"";position:absolute;left:18px;right:18px;bottom:9px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.billing-grid a:hover{transform:translateY(-3px)!important;background:#f0c75e!important;color:#071528!important;border-color:#f0c75e!important;box-shadow:0 10px 28px rgba(240,199,94,.22)!important;filter:none!important}
+.billing-grid a:hover::after{transform:scaleX(1)}
+.billing-grid a:active{transform:translateY(0) scale(.97)!important}
+.billing-grid article{transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
+.billing-grid article:has(a):hover{border-color:#526f89;box-shadow:0 12px 32px rgba(0,0,0,.18);transform:translateY(-2px)}
