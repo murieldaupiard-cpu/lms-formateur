@@ -74,3 +74,6 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 .billing-grid a:active{transform:translateY(0) scale(.97)!important}
 .billing-grid article{transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
 .billing-grid article:has(a):hover{border-color:#526f89;box-shadow:0 12px 32px rgba(0,0,0,.18);transform:translateY(-2px)}
+
+/* Saved showcase profiles */
+.saved-profiles{margin:18px 0 22px;text-align:left}.saved-profiles>small,.secure-login-label{display:block;font-size:10px;letter-spacing:.14em;color:#7891a8;margin:0 0 9px}.saved-profiles button{width:100%;display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:11px;padding:10px 12px;margin:7px 0;border:1px solid #29445d;border-radius:11px;background:#0a1c30;color:#eef5fb;text-align:left}.saved-profiles button:hover{border-color:#d4af37!important;background:#102842!important;box-shadow:0 8px 22px rgba(212,175,55,.12)!important}.saved-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#d4af37;color:#071528;font-size:11px;font-weight:900}.saved-profiles button strong{font-size:14px}.saved-profiles button b{color:#d4af37}.secure-login-label{margin-top:18px;padding-top:18px;border-top:1px solid #20384e}
