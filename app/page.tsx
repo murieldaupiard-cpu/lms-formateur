@@ -4,7 +4,7 @@ import {useEffect,useState} from "react";
 type Step=1|2|3|4|5;
 type ActivityDraft={title:string;kind:"quiz"|"game"|"survey";subtitle:string};
 type SequenceDraft={title:string;objective:string;layout:string;content:string;color?:string;activities:ActivityDraft[]};
-type Publication={id:string;title:string;description:string|null;pedagogical_objective:string|null;layout:string|null;content_text:string|null;is_published:boolean;modules?:{title:string;pedagogical_objective?:string|null;layout?:string|null;content_text?:string|null;position?:number;activities?:{title:string;activity_type:string}[]}[];competencies?:{title:string}[]};
+type Publication={id:string;title:string;description:string|null;pedagogical_objective:string|null;layout:string|null;content_text:string|null;is_published:boolean;modules?:{title:string;pedagogical_objective?:string|null;layout?:string|null;content_text?:string|null;color?:string|null;position?:number;activities?:{title:string;activity_type:string}[]}[];competencies?:{title:string}[]};
 const SUPABASE_URL="https://jfvmqfxivydihgjcyffq.supabase.co";
 const SUPABASE_KEY="sb_publishable_dwSQTgZooCKeXxFCCQMlqw_3QgVMJ62";
 const api=async(path:string,options:RequestInit={},token?:string)=>fetch(`${SUPABASE_URL}/rest/v1/${path}`,{...options,headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${token||SUPABASE_KEY}`,"Content-Type":"application/json",Prefer:"return=representation",...(options.headers||{})}});
