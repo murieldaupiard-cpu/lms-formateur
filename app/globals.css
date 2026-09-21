@@ -183,3 +183,5 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 .auto-program>div span{display:grid;gap:5px}.auto-program>div span small{font-size:11px;line-height:1.45;opacity:.75;text-transform:none;letter-spacing:0}
 .composed-text p{white-space:pre-wrap;max-height:220px;overflow:auto}
 @media(max-width:800px){.digital-sections{grid-template-columns:1fr}}
+
+.delete-account-btn{border:1px solid #ef444455!important;color:#fca5a5!important;background:#ef44440a!important;border-radius:999px;padding:8px 12px;font-size:9px;font-weight:900;letter-spacing:.08em}.delete-account-btn:hover{background:#ef444422!important;border-color:#ef4444!important;color:#fff!important}
