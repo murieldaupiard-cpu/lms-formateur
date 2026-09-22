@@ -255,3 +255,82 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 .competence-intro-builder{margin:0 0 30px;padding:24px;border:1px solid #d8b74f55;border-radius:20px;background:#0b1e31}.competence-intro-card{margin-bottom:22px!important}.competence-intro-card .learner-module-top.cadga-sequence-card{background:radial-gradient(circle at 75% 30%,#d8b74f,#4a3d1a 67%)!important}
 .intro-reac-import{display:flex!important;flex-direction:column!important;gap:4px!important;padding:18px!important;margin:14px 0!important;border:1px dashed #52708b!important;border-radius:14px!important;background:#09192b!important;cursor:pointer!important}.intro-reac-import:hover{border-color:#72c9ff!important}.intro-reac-import input{display:none!important}.intro-reac-import strong{font-size:11px!important}.intro-reac-import span{font-size:9px!important;color:#91a7bb!important}
 @media(max-width:800px){.new-competence-choice>div{grid-template-columns:1fr}}
+
+
+/* Trainer LMS — polished REAC action controls */
+.creator-page .reac-ready{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  gap:12px!important;
+  align-items:center!important;
+  margin:14px 0 18px!important;
+  padding:16px 18px!important;
+  border:1px solid #29445e!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,#0c2137,#09192b)!important;
+}
+.creator-page .reac-ready>div{
+  min-width:0!important;
+  display:grid!important;
+  gap:4px!important;
+}
+.creator-page .reac-ready>div small{
+  font-size:8px!important;
+  font-weight:900!important;
+  letter-spacing:.14em!important;
+  color:#72c9ff!important;
+}
+.creator-page .reac-ready>div strong{
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  font-size:11px!important;
+  color:#f4f8fc!important;
+}
+.creator-page .reac-ready>div span{
+  font-size:9px!important;
+  color:#8fa5b8!important;
+}
+.creator-page .reac-ready>button{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-height:42px!important;
+  padding:0 16px!important;
+  border:1px solid #3a5871!important;
+  border-radius:12px!important;
+  background:#0f2942!important;
+  color:#dce9f5!important;
+  box-shadow:none!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  letter-spacing:.01em!important;
+  text-transform:none!important;
+  cursor:pointer!important;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease!important;
+}
+.creator-page .reac-ready>button:hover:not(:disabled){
+  transform:translateY(-1px)!important;
+  border-color:#72c9ff!important;
+  background:#143451!important;
+}
+.creator-page .reac-ready>button:disabled{
+  opacity:.55!important;
+  cursor:default!important;
+}
+.creator-page .reac-ready>button.ai-reac{
+  border-color:#6d4cc5!important;
+  background:linear-gradient(135deg,#261b4c,#15253c)!important;
+  color:#f3efff!important;
+}
+.creator-page .reac-ready>button.ai-reac:hover:not(:disabled){
+  border-color:#a78bfa!important;
+  background:linear-gradient(135deg,#31215f,#19304a)!important;
+}
+@media(max-width:800px){
+  .creator-page .reac-ready{grid-template-columns:1fr!important}
+  .creator-page .reac-ready>button{width:100%!important}
+}
