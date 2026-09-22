@@ -234,3 +234,12 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 /* Fix creator sequence preview: legacy absolute OPEN label was overlapping the title */
 .creator-sequence-card .learner-module-top.cadga-sequence-card em{position:relative!important;left:auto!important;bottom:auto!important;margin-top:auto!important;display:block!important}
 .creator-sequence-card .learner-module-top.cadga-sequence-card h4{margin:auto 0 18px!important}
+
+/* CADGA sequence gallery proportions: portrait cards, never full-width */
+.learner-modules-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(240px,300px))!important;gap:20px!important;justify-content:start!important;align-items:stretch!important}
+.learner-module-card{width:100%!important;max-width:300px!important;min-width:0!important;min-height:440px!important}
+.learner-module-top.cadga-sequence-card{height:285px!important;min-height:285px!important}
+.learner-module-bottom{min-height:115px!important}
+.creator-sequence-card{width:300px!important;max-width:300px!important;min-height:440px!important}
+.creator-sequence-card .learner-module-top.cadga-sequence-card{height:285px!important;min-height:285px!important}
+@media(max-width:700px){.learner-modules-grid{grid-template-columns:minmax(0,300px)!important}.learner-module-card,.creator-sequence-card{width:min(300px,100%)!important}}
