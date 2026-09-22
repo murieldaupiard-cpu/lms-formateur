@@ -334,3 +334,84 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
   .creator-page .reac-ready{grid-template-columns:1fr!important}
   .creator-page .reac-ready>button{width:100%!important}
 }
+
+
+/* Competency presentation is its own creation screen */
+.creator-page .content-import.sequence-closed>.sequence-color-picker,
+.creator-page .content-import.sequence-closed>.creator-cadga-preview,
+.creator-page .content-import.sequence-closed>.learner-modules-preview,
+.creator-page .content-import.sequence-closed>label:not(.intro-reac-import),
+.creator-page .content-import.sequence-closed>.next-step:not(.intro-finish){display:none!important}
+
+.creator-page .competence-intro-builder{
+  max-width:980px!important;
+  margin:0 auto 30px!important;
+  padding:28px!important;
+}
+.creator-page .competence-intro-builder>label:not(.intro-reac-import){
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:9px!important;
+  margin:24px 0 0!important;
+  color:#eef5fb!important;
+  font-size:12px!important;
+  font-weight:700!important;
+}
+.creator-page .competence-intro-builder>label>textarea{
+  display:block!important;
+  width:100%!important;
+  min-height:180px!important;
+  box-sizing:border-box!important;
+  padding:18px!important;
+  border:1px solid #36526d!important;
+  border-radius:14px!important;
+  background:#07182a!important;
+  color:#f4f8fc!important;
+  font:400 13px/1.65 inherit!important;
+  resize:vertical!important;
+}
+.creator-page .competence-intro-builder>label>textarea:focus{
+  outline:none!important;
+  border-color:#72c9ff!important;
+  box-shadow:0 0 0 3px #72c9ff16!important;
+}
+.creator-page .competence-intro-builder .intro-finish{
+  width:auto!important;
+  margin:18px 0 0 auto!important;
+  display:flex!important;
+}
+
+.reac-ai-preview{
+  margin:18px 0 24px!important;
+  padding:22px!important;
+  border:1px solid #6d4cc566!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#121d38,#0a1b2e)!important;
+}
+.reac-ai-preview-head{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:18px!important;margin-bottom:16px!important}
+.reac-ai-preview-head small{font-size:8px!important;font-weight:900!important;letter-spacing:.15em!important;color:#b9a5ff!important}
+.reac-ai-preview-head h4{margin:6px 0 0!important;font-size:18px!important;color:#f5f2ff!important}
+.reac-ai-preview-head>span{padding:7px 10px!important;border:1px solid #7658bd!important;border-radius:999px!important;color:#cfc2ff!important;font-size:8px!important;font-weight:900!important;letter-spacing:.08em!important}
+.reac-ai-intro{margin:0 0 16px!important;color:#b8c8d7!important;font-size:12px!important;line-height:1.65!important}
+.reac-ai-sections{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.reac-ai-sections article{display:grid!important;grid-template-columns:32px 1fr!important;gap:10px!important;padding:13px!important;border:1px solid #ffffff10!important;border-radius:12px!important;background:#08192a!important}
+.reac-ai-sections article>small{color:#a78bfa!important;font-size:9px!important;font-weight:900!important}
+.reac-ai-sections article strong{display:block!important;color:#edf3f9!important;font-size:11px!important;margin-bottom:5px!important}
+.reac-ai-sections article p{margin:0!important;color:#91a7bb!important;font-size:10px!important;line-height:1.5!important}
+.use-ai-proposal{margin-top:16px!important;padding:11px 14px!important;border:1px solid #7658bd!important;border-radius:10px!important;background:#211946!important;color:#f1edff!important;font-size:9px!important;font-weight:900!important;letter-spacing:.06em!important;cursor:pointer!important}
+
+.add-sequence-gateway{
+  max-width:720px!important;
+  margin:30px auto!important;
+  padding:34px!important;
+  text-align:center!important;
+  border:1px solid #29445e!important;
+  border-radius:20px!important;
+  background:linear-gradient(145deg,#0d2339,#09192b)!important;
+}
+.add-sequence-gateway small{color:#72c9ff!important;font-size:8px!important;font-weight:900!important;letter-spacing:.15em!important}
+.add-sequence-gateway h4{margin:8px 0!important;font:600 28px Georgia,serif!important;color:#f4f8fc!important}
+.add-sequence-gateway p{margin:0 auto 20px!important;max-width:520px!important;color:#91a7bb!important;font-size:11px!important;line-height:1.6!important}
+.add-sequence-gateway button{padding:13px 18px!important;border:1px solid #72c9ff!important;border-radius:11px!important;background:#102b45!important;color:#eaf6ff!important;font-size:10px!important;font-weight:900!important;letter-spacing:.05em!important;cursor:pointer!important}
+.add-sequence-gateway button:hover{transform:translateY(-2px)!important;background:#153a5b!important}
+@media(max-width:800px){.reac-ai-sections{grid-template-columns:1fr!important}.creator-page .competence-intro-builder{padding:18px!important}}
