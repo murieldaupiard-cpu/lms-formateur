@@ -230,3 +230,7 @@ button:disabled,[aria-disabled="true"]{cursor:not-allowed;opacity:.55}
 
 /* Creation previews must mirror the learner UI, not use hero banners */
 .creator-cadga-preview,.creator-objective-preview{margin:24px 0}.creator-cadga-preview>small,.creator-objective-preview>small{display:block;margin-bottom:10px;color:#72c9ff;font-size:9px;font-weight:900;letter-spacing:.15em}.creator-sequence-card{width:min(350px,100%)!important;max-width:350px!important}.creator-sequence-card .learner-module-top.cadga-sequence-card{height:290px!important;min-height:290px!important}.creator-sequence-card .learner-module-top.cadga-sequence-card h4{font-size:30px!important}.creator-objective-row{width:min(720px,100%)!important;box-sizing:border-box!important}
+
+/* Fix creator sequence preview: legacy absolute OPEN label was overlapping the title */
+.creator-sequence-card .learner-module-top.cadga-sequence-card em{position:relative!important;left:auto!important;bottom:auto!important;margin-top:auto!important;display:block!important}
+.creator-sequence-card .learner-module-top.cadga-sequence-card h4{margin:auto 0 18px!important}
