@@ -19,5 +19,20 @@ test('multi-document dossier preserves media references and rejects invented sou
  const p=normalizeProposal({summary:'Entreprise',blocks:[{title:'Produits',items:['Cinq gammes'],sourceIds:['D2','D99','https://external.invalid']}]},'source',docs);
  assert.deepEqual(p.sections[0].sourceIds,['D2']);assert.deepEqual(JSON.parse(JSON.stringify(p)).documents,docs);assert.equal(recommendedModel(p),'dossier');
  const purpose=presentationPurpose('Découvrir une entreprise','Identifier ses produits',false,'dossier',docs);
- assert.match(purpose,/Dossier illustré/);assert.match(purpose,/D1 : Infographie.pdf/);assert.match(purpose,/D2 : Catalogue.pdf/);assert.match(purpose,/sourceIds/);assert.doesNotMatch(purpose,/owner\/dossiers/);
+ assert.match(purpose,/Dossier illustré/);assert.match(purpose,/D1 : Infographie.pdf/);assert.match(purpose,/D2 : Catalogue.pdf/);assert.match(purpose,/sourceIds/);assert.match(purpose,/metrics/);assert.match(purpose,/timeline/);
+ const kpis=normalizeProposal({summary:'E',blocks:[{title:'Identité',items:['18 salariés']}],metrics:['18 salariés','1,2 M€',3],timeline:['2012','2016']},'source',docs);
+ assert.deepEqual(kpis.metrics,['18 salariés','1,2 M€']);assert.deepEqual(kpis.timeline,['2012','2016']);assert.doesNotMatch(purpose,/owner\/dossiers/);
+});
+
+test('AI can recommend a mind map or infographic, including for a REAC',()=>{
+ const reac=presentationPurpose('Accueillir un visiteur','',true);
+ assert.match(reac,/recommendedModel/);assert.match(reac,/mindmap/);assert.match(reac,/infographic/);assert.match(reac,/REAC/);assert.doesNotMatch(reac,/dossier \(/);
+ assert.match(presentationPurpose('Accueillir','',true,'mindmap'),/idée centrale/);
+ assert.match(presentationPurpose('Accueillir','',true,'infographic'),/décomptes exacts/);
+ const p=normalizeProposal({summary:'REAC',center:'Accueil du public',recommendedModel:'mindmap',recommendationReason:'Compétences reliées.',blocks:[{title:'Activité 1',type:'skills',items:['Accueillir']}]},'src');
+ assert.equal(recommendedModel(p),'mindmap');assert.equal(p.center,'Accueil du public');assert.equal(p.recommendationReason,'Compétences reliées.');
+ const bad=normalizeProposal({summary:'x',recommendedModel:'<script>',recommendationReason:'x',blocks:[{title:'A',type:'skills',items:['a']}]},'src');
+ assert.equal(bad.recommendedModel,undefined);assert.equal(bad.recommendationReason,'');assert.equal(recommendedModel(bad),'mindmap');
+ assert.equal(normalizeProposal({summary:'x',recommendedModel:'dossier',blocks:[{title:'A',items:['a']}]},'src').recommendedModel,undefined);
+ assert.equal(recommendedModel({sections:[{type:'context',items:['a']}],metrics:['18 salariés','1,2 M€'],timeline:['2012']}),'infographic');
 });
