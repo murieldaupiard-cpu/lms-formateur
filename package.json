@@ -11,13 +11,13 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "jszip": "^3.10.1",
+    "mammoth": "^1.10.0",
     "next": "latest",
+    "pdfjs-dist": "5.4.149",
     "react": "latest",
     "react-dom": "latest",
-    "typescript": "latest",
-    "pdfjs-dist": "^5.4.149",
-    "mammoth": "^1.10.0",
-    "jszip": "^3.10.1",
-    "tesseract.js": "^6.0.1"
+    "tesseract.js": "^6.0.1",
+    "typescript": "latest"
   }
 }
