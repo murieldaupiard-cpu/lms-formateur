@@ -19,7 +19,7 @@ test('multi-document dossier preserves media references and rejects invented sou
  const p=normalizeProposal({summary:'Entreprise',blocks:[{title:'Produits',items:['Cinq gammes'],sourceIds:['D2','D99','https://external.invalid']}]},'source',docs);
  assert.deepEqual(p.sections[0].sourceIds,['D2']);assert.deepEqual(JSON.parse(JSON.stringify(p)).documents,docs);assert.equal(recommendedModel(p),'dossier');
  const purpose=presentationPurpose('Découvrir une entreprise','Identifier ses produits',false,'dossier',docs);
- assert.match(purpose,/Dossier illustré/);assert.match(purpose,/D1 : Infographie.pdf/);assert.match(purpose,/D2 : Catalogue.pdf/);assert.match(purpose,/sourceIds/);assert.match(purpose,/metrics/);assert.match(purpose,/timeline/);
+ assert.match(purpose,/Dossier illustré/);assert.match(purpose,/D1 : Infographie.pdf/);assert.match(purpose,/D2 : Catalogue.pdf/);assert.match(purpose,/sourceIds/);assert.match(purpose,/OCR/);assert.match(purpose,/omets-le/);assert.doesNotMatch(purpose,/signale les contradictions/);assert.match(purpose,/metrics/);assert.match(purpose,/timeline/);
  const kpis=normalizeProposal({summary:'E',blocks:[{title:'Identité',items:['18 salariés']}],metrics:['18 salariés','1,2 M€',3],timeline:['2012','2016']},'source',docs);
  assert.deepEqual(kpis.metrics,['18 salariés','1,2 M€']);assert.deepEqual(kpis.timeline,['2012','2016']);assert.doesNotMatch(purpose,/owner\/dossiers/);
 });
