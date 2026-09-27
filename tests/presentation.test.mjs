@@ -1,12 +1,14 @@
 import {strict as assert} from 'node:assert';
 import {test} from 'node:test';
 import {normalizeProposal,presentationPurpose,recommendedModel} from '../app/lib/presentation.ts';
+
 test('normalizes string content and rejects unusable provider responses',()=>{
  const p=normalizeProposal({summary:'Résumé',blocks:[{title:'Méthode',content:'Lire le document',type:'steps'},null]},'Source');
  assert.deepEqual(p.sections[0].items,['Lire le document']);
- assert.equal(p.source,'Source');assert.equal(recommendedModel(p),'program');
+ assert.equal(p.source,'Source');
  for(const response of [{},null,{summary:'Vide',blocks:[]},{blocks:[{items:[null,42,{}]}]}])assert.throws(()=>normalizeProposal(response,'Source'));
 });
+
 test('generation uses selected model and distinguishes course from REAC',()=>{
  const course=presentationPurpose('Accueillir','Identifier la demande',false,'cards');
  assert.match(course,/Identifier la demande/);assert.match(course,/Cartes pédagogiques/);assert.doesNotMatch(course,/uniquement la compétence/);
@@ -17,29 +19,33 @@ test('generation uses selected model and distinguishes course from REAC',()=>{
 test('multi-document dossier preserves media references and rejects invented source IDs',()=>{
  const docs=[{id:'D1',name:'Infographie.pdf',original:'owner/dossiers/a/original.pdf',pages:[{number:1,image:'owner/dossiers/a/page.jpg'}]},{id:'D2',name:'Catalogue.pdf',original:'owner/dossiers/b/original.pdf',pages:[]}];
  const p=normalizeProposal({summary:'Entreprise',blocks:[{title:'Produits',items:['Cinq gammes'],sourceIds:['D2','D99','https://external.invalid']}]},'source',docs);
- assert.deepEqual(p.sections[0].sourceIds,['D2']);assert.deepEqual(JSON.parse(JSON.stringify(p)).documents,docs);assert.equal(recommendedModel(p),'dossier');
+ assert.deepEqual(p.sections[0].sourceIds,['D2']);assert.deepEqual(JSON.parse(JSON.stringify(p)).documents,docs);
  const purpose=presentationPurpose('Découvrir une entreprise','Identifier ses produits',false,'dossier',docs);
- assert.match(purpose,/Dossier illustré/);assert.match(purpose,/D1 : Infographie.pdf/);assert.match(purpose,/D2 : Catalogue.pdf/);assert.match(purpose,/sourceIds/);assert.match(purpose,/OCR/);assert.match(purpose,/omets-le/);assert.doesNotMatch(purpose,/signale les contradictions/);assert.match(purpose,/metrics/);assert.match(purpose,/timeline/);
- const kpis=normalizeProposal({summary:'E',blocks:[{title:'Identité',items:['18 salariés']}],metrics:['18 salariés','1,2 M€',3],timeline:['2012','2016']},'source',docs);
- assert.deepEqual(kpis.metrics,['18 salariés','1,2 M€']);assert.deepEqual(kpis.timeline,['2012','2016']);assert.doesNotMatch(purpose,/owner\/dossiers/);
+ assert.match(purpose,/Dossier à onglets/);assert.match(purpose,/D1 : Infographie.pdf/);assert.match(purpose,/D2 : Catalogue.pdf/);assert.match(purpose,/sourceIds/);assert.doesNotMatch(purpose,/owner\/dossiers/);
+ assert.match(purpose,/metrics/);assert.match(purpose,/timeline/);
+ assert.match(purpose,/OCR/);assert.match(purpose,/omets-le/);assert.doesNotMatch(purpose,/signale les contradictions/);
 });
 
-test('AI can recommend a mind map or infographic, including for a REAC',()=>{
- const reac=presentationPurpose('Accueillir un visiteur','',true);
- assert.match(reac,/recommendedModel/);assert.match(reac,/mindmap/);assert.match(reac,/infographic/);assert.match(reac,/REAC/);assert.doesNotMatch(reac,/dossier \(/);
- assert.match(presentationPurpose('Accueillir','',true,'mindmap'),/idée centrale/);
- assert.match(presentationPurpose('Accueillir','',true,'infographic'),/décomptes exacts/);
- const p=normalizeProposal({summary:'REAC',center:'Accueil du public',recommendedModel:'mindmap',recommendationReason:'Compétences reliées.',blocks:[{title:'Activité 1',type:'skills',items:['Accueillir']}]},'src');
- assert.equal(recommendedModel(p),'mindmap');assert.equal(p.center,'Accueil du public');assert.equal(p.recommendationReason,'Compétences reliées.');
- const bad=normalizeProposal({summary:'x',recommendedModel:'<script>',recommendationReason:'x',blocks:[{title:'A',type:'skills',items:['a']}]},'src');
- assert.equal(bad.recommendedModel,undefined);assert.equal(bad.recommendationReason,'');assert.equal(recommendedModel(bad),'mindmap');
- assert.equal(normalizeProposal({summary:'x',recommendedModel:'dossier',blocks:[{title:'A',items:['a']}]},'src').recommendedModel,undefined);
- assert.equal(recommendedModel({sections:[{type:'context',items:['a']}],metrics:['18 salariés','1,2 M€'],timeline:['2012']}),'infographic');
+test('dossier is the default presentation and must be exhaustive and faithful',()=>{
+ assert.equal(recommendedModel({sections:[{type:'skills',items:['a']}]}),'dossier');
+ const purpose=presentationPurpose('Accueillir','Présenter l’entreprise',false,'dossier',[{id:'D1',name:'Organigramme.pdf',original:'',pages:[]}]);
+ assert.match(purpose,/EXHAUSTIVITÉ/);assert.match(purpose,/organigramme/);assert.match(purpose,/distributeur/);assert.match(purpose,/groups/);assert.match(purpose,/N’invente aucune personne/);
+ assert.match(purpose,/Ne crée pas d’onglet « Documents »/);
+ const reac=presentationPurpose('Assurer l’accueil physique et téléphonique','',true,'dossier');
+ assert.match(reac,/intitulé exact/);assert.match(reac,/Être capable de/);assert.match(reac,/mot pour mot/);
 });
 
-test('competence presentations are explicit: exact title, explanation, objectives',()=>{
- const purpose=presentationPurpose('Assurer l’accueil physique et téléphonique','',true,'mindmap');
- assert.match(purpose,/intitulé exact/);assert.match(purpose,/objectives/);assert.match(purpose,/Être capable de/);assert.match(purpose,/explanation/);
- const p=normalizeProposal({title:'Accueil',summary:'Texte.',objectives:['Être capable d’accueillir',3],blocks:[{title:'Contexte',explanation:'Où et comment.',items:['Tous secteurs']}]},'src');
- assert.equal(p.title,'Accueil');assert.deepEqual(p.objectives,['Être capable d’accueillir']);assert.equal(p.sections[0].explanation,'Où et comment.');
+test('dossier tabs keep structured content and drop empty tabs',()=>{
+ const p=normalizeProposal({title:'Primevère',summary:'Texte.',objectives:['Être capable de situer l’entreprise',3],blocks:[
+  {title:'Équipe',heading:'Les services',kind:'groups',explanation:'Qui fait quoi.',groups:[{title:'Direction des achats',items:['Yves Billet · Directeur des achats',7]},{title:'',items:[]}],callout:{title:'Repère',text:'Le bon interlocuteur.'}},
+  {title:'Histoire',kind:'timeline',timeline:[{date:'1958',text:'Création'},{}]},
+  {title:'Chiffres',kind:'facts',facts:[{value:'150',label:'collaborateurs'}]},
+  {title:'Vide',explanation:'Rien.'},
+ ]},'src');
+ assert.equal(p.title,'Primevère');assert.deepEqual(p.objectives,['Être capable de situer l’entreprise']);
+ assert.equal(p.sections.length,3);
+ assert.deepEqual(p.sections[0].groups,[{title:'Direction des achats',subtitle:'',items:['Yves Billet · Directeur des achats']}]);
+ assert.equal(p.sections[0].heading,'Les services');assert.equal(p.sections[0].callout.text,'Le bon interlocuteur.');
+ assert.deepEqual(p.sections[1].timeline,[{date:'1958',text:'Création'}]);
+ assert.deepEqual(p.sections[2].facts,[{value:'150',label:'collaborateurs'}]);
 });
