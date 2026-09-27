@@ -18,3 +18,13 @@
 .lang-switch button:focus-visible{outline:2px solid currentColor;outline-offset:1px}
 .studio-nav .lang-switch{margin-left:auto}
 .studio-nav-right .lang-switch{margin-left:0}
+
+/* Étapes de création (1 → 5) */
+.studio-wizard-nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:0 16px}
+.studio-wizard-nav i{font-style:normal;opacity:.4}
+.studio-wizard-nav button{cursor:pointer;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.04);color:inherit;padding:8px 14px 8px 8px;font-size:11px;font-weight:900;letter-spacing:.08em;opacity:.75}
+.studio-wizard-nav button b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);font-size:11px}
+.studio-wizard-nav button:hover{opacity:1;border-color:rgba(255,255,255,.35)}
+.studio-wizard-nav button.active{opacity:1;border-color:#72c9ff;background:rgba(114,201,255,.14)}
+.studio-wizard-nav button.active b{background:#72c9ff;color:#071528}
+@media (max-width:640px){.studio-wizard-nav i{display:none}.studio-wizard-nav button{padding:6px 10px 6px 6px}}

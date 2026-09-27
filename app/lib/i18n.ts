@@ -77,7 +77,7 @@ function translateLeaf(el: Element) {
 }
 
 function translateAttrs(el: Element) {
- if (skipped(el)) return;
+ if (el.closest('[translate="no"]')) return;
  for (const a of ATTRS) {
   const v = el.getAttribute(a);
   if (!v) continue;
