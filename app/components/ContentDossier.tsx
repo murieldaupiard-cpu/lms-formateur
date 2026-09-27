@@ -57,7 +57,7 @@ export default function ContentDossier({proposal,color,kicker,label="DOSSIER",ac
   <nav className="cd-tabs" role="tablist" aria-label="Onglets du dossier">{all.map((t,i)=><button type="button" role="tab" id={`${base}-${i}`} aria-selected={i===current} aria-controls={`${base}-panel`} className={i===current?"active":""} key={t.id} onClick={()=>setActive(i)}><b>{n(i)}</b><span>{t.label}</span></button>)}</nav>
   <div className="cd-panel" role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-${current}`}>
    {id==="essentiel"&&<section>
-    <div className="cd-heading"><span>{n(0)} · {label}</span><h2>{str(proposal?.title)||"L’essentiel"}</h2>{(intro||lead?.explanation)&&<p>{intro||lead?.explanation}</p>}</div>
+    <div className="cd-heading"><span>{n(0)} · {label}</span><h2>{lead&&lead.heading!==lead.title&&lead.heading!==str(proposal?.title)?lead.heading:"L’essentiel"}</h2>{(intro||lead?.explanation)&&<p>{intro||lead?.explanation}</p>}</div>
     {lead&&lead.facts.length>0&&<div className="cd-facts">{lead.facts.map((f,i)=><article key={i}><strong>{f.value}</strong><span>{f.label}</span></article>)}</div>}
     {lead&&lead.items.length>0&&<ul className="cd-list">{lead.items.map((x,i)=><li key={i}>{x}</li>)}</ul>}
     {objectives.length>0&&<div className="cd-objectives"><strong>{competence?"Objectifs de la compétence":"Objectifs"}</strong><span>{competence?"À l’issue de cette compétence, vous serez capable de :":"À l’issue de ce contenu, vous serez capable de :"}</span><ol>{objectives.map((o,i)=><li key={i}>{o.replace(/^être capable (?:de\s+|d[’'])/i,"").replace(/^./,c=>c.toUpperCase())}</li>)}</ol></div>}
