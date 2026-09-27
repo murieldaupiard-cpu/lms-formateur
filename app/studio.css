@@ -10,3 +10,11 @@
 .learner-competence-card span{font-size:11px;font-weight:900;letter-spacing:.1em;color:#dbe6f0}
 .learner-competence-card em{justify-self:start;margin-top:6px;padding:11px 16px;border-radius:10px;background:#ffffff1a;border:1px solid #ffffff33;font-style:normal;font-size:11px;font-weight:900;letter-spacing:.06em}
 .learner-modules-head h1{font-family:Georgia,serif;font-size:clamp(28px,4vw,40px);margin:8px 0 5px;color:#f7fafc}
+
+/* Sélecteur de langue FR / EN */
+.lang-switch{display:inline-flex;flex:none;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px;gap:2px;background:rgba(0,0,0,.25)}
+.lang-switch button{cursor:pointer;border:0;border-radius:999px;background:transparent;color:inherit;opacity:.65;font-size:11px;font-weight:900;letter-spacing:.08em;padding:6px 10px;line-height:1}
+.lang-switch button.active{opacity:1;background:rgba(255,255,255,.16)}
+.lang-switch button:focus-visible{outline:2px solid currentColor;outline-offset:1px}
+.studio-nav .lang-switch{margin-left:auto}
+.studio-nav-right .lang-switch{margin-left:0}
