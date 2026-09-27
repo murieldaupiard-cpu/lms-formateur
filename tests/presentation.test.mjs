@@ -49,3 +49,20 @@ test('dossier tabs keep structured content and drop empty tabs',()=>{
  assert.deepEqual(p.sections[1].timeline,[{date:'1958',text:'Création'}]);
  assert.deepEqual(p.sections[2].facts,[{value:'150',label:'collaborateurs'}]);
 });
+
+test('quiz de 10 questions demandé pour un cours, pas pour la compétence', async () => {
+ const m = await import('../app/lib/presentation.ts');
+ assert.ok(m.presentationPurpose('C','O',false,'dossier',[]).includes('exactement 10 questions'));
+ assert.ok(!m.presentationPurpose('C','',true,'dossier',[]).includes('QUIZ'));
+ const n = m.normalizeProposal({blocks:[{title:'a',items:['x']}],quiz:[{question:'Q ?',choices:['a','b','c'],answer:1,explanation:'e'},{question:'mauvaise',choices:['a'],answer:0},{question:'Q2',choices:['a','b','c'],answer:5}]},'s',[]);
+ assert.equal(n.quiz.length, 1);
+ assert.equal(n.quiz[0].answer, 1);
+});
+
+test('le décalage des choix conserve la bonne réponse et varie sa position', async () => {
+ const m = await import('../app/lib/presentation.ts');
+ const quiz = Array.from({length:10},(_,i)=>({question:`Question numéro ${i} ?`,choices:[`bonne ${i}`,`faux A ${i}`,`faux B ${i}`],answer:0,explanation:''}));
+ const n = m.normalizeProposal({blocks:[{title:'a',items:['x']}],quiz},'s',[]);
+ n.quiz.forEach((q,i)=>assert.equal(q.choices[q.answer],`bonne ${i}`));
+ assert.ok(new Set(n.quiz.map(q=>q.answer)).size >= 2);
+});

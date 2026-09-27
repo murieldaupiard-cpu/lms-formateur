@@ -31,6 +31,28 @@ function PageImage({path,label}:{path:string;label:string}){
  return <figure className="cd-figure">{url?<a href={url} target="_blank" rel="noreferrer" title="Agrandir"><img src={url} alt={label} loading="lazy"/></a>:<div className="cd-figure-wait" role="status">Chargement du visuel…</div>}<figcaption>{label}</figcaption></figure>;
 }
 
+type Question={question:string;choices:string[];answer:number;explanation:string};
+function quizOf(proposal:any):Question[]{
+ return (Array.isArray(proposal?.quiz)?proposal.quiz:[]).map((q:any)=>({question:str(q?.question),choices:list(q?.choices),answer:Number(q?.answer),explanation:str(q?.explanation)}))
+  .filter((q:Question)=>q.question&&q.choices.length>=2&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.choices.length);
+}
+
+/** Quiz de fin : une question à la fois dans le même onglet, score, « À retenir », puis résultat. */
+function Quiz({questions,heading,onReview}:{questions:Question[];heading:string;onReview:()=>void}){
+ const [index,setIndex]=useState(0);const [picked,setPicked]=useState<number|null>(null);const [score,setScore]=useState(0);const [done,setDone]=useState(false);
+ const q=questions[index];const total=questions.length;
+ function choose(i:number){if(picked!==null)return;setPicked(i);if(i===q.answer)setScore(s=>s+1)}
+ function next(){if(index+1>=total){setDone(true);return}setIndex(index+1);setPicked(null)}
+ function restart(){setIndex(0);setPicked(null);setScore(0);setDone(false)}
+ if(done){const ratio=score/total;return <div className="cd-quiz-result" role="status"><span>{score} / {total}</span><h3>{ratio>=.8?"Excellent, le contenu est maîtrisé.":ratio>=.5?"Bien joué, encore un petit effort.":"Reprends les onglets avant de réessayer."}</h3><div><button type="button" onClick={restart}>RECOMMENCER</button><button type="button" className="ghost" onClick={onReview}>REVOIR LE CONTENU</button></div></div>}
+ return <div className="cd-quiz" key={index}>
+  <div className="cd-quiz-head"><div><span>{heading}</span><h3>{q.question}</h3></div><div className="cd-quiz-count"><b>{index+1} / {total}</b><span>SCORE {score}</span></div></div>
+  <div className="cd-quiz-progress" aria-hidden="true"><i style={{width:`${((index+(picked!==null?1:0))/total)*100}%`}}/></div>
+  <div className="cd-quiz-choices">{q.choices.map((c,i)=><button type="button" key={i} disabled={picked!==null} className={picked===null?"":i===q.answer?"correct":i===picked?"wrong":"muted"} aria-pressed={picked===i} onClick={()=>choose(i)}>{c}</button>)}</div>
+  {picked!==null&&<div className="cd-quiz-feedback" aria-live="polite"><div><b>{picked===q.answer?"Bonne réponse":"À retenir"}</b>{q.explanation&&<p>{q.explanation}</p>}{picked!==q.answer&&!q.explanation&&<p>La bonne réponse était : {q.choices[q.answer]}</p>}</div><button type="button" onClick={next}>{index+1>=total?"VOIR MON RÉSULTAT →":"QUESTION SUIVANTE →"}</button></div>}
+ </div>;
+}
+
 function DownloadRow({doc,index}:{doc:SourceDocument;index:number}){
  const [busy,setBusy]=useState(false);const [error,setError]=useState('');
  async function download(){setBusy(true);setError('');try{const url=URL.createObjectURL(await loadMedia(doc.original));const a=document.createElement('a');a.href=url;a.download=doc.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}catch(e:any){setError(e?.message||'Téléchargement impossible.')}finally{setBusy(false)}}
@@ -41,10 +63,11 @@ export default function ContentDossier({proposal,color,kicker,label="DOSSIER",ac
  const base=useId();const parsed=useMemo(()=>tabsOf(proposal),[proposal]);
  // Un onglet « L’essentiel » produit par l’IA est fusionné dans l’onglet d’accueil pour éviter le doublon.
  const lead=parsed.length>1&&/essentiel/i.test(parsed[0].title)?parsed[0]:undefined;const tabs=lead?parsed.slice(1):parsed;
+ const questions=useMemo(()=>quizOf(proposal),[proposal]);
  const docs:SourceDocument[]=Array.isArray(proposal?.documents)?proposal.documents:[];
  const objectives=list(proposal?.objectives);const intro=str(proposal?.intro);
  const competence=proposal?.kind==="competence";
- const all=[{id:"essentiel",label:"L’essentiel"},...tabs.map((t,i)=>({id:`t${i}`,label:t.title})),...(docs.length?[{id:"docs",label:"Documents"}]:[])];
+ const all=[{id:"essentiel",label:"L’essentiel"},...tabs.map((t,i)=>({id:`t${i}`,label:t.title})),...(questions.length?[{id:"quiz",label:"Quiz"}]:[]),...(docs.length?[{id:"docs",label:"Documents"}]:[])];
  const [active,setActive]=useState(0);const current=Math.min(active,all.length-1);const id=all[current]?.id;
  const tab=id?.startsWith("t")?tabs[Number(id.slice(1))]:undefined;
  const graphic=(ids:string[])=>docs.filter(d=>ids.includes(d.id)&&d.reader!=="text"&&d.pages?.length);
@@ -75,6 +98,9 @@ export default function ContentDossier({proposal,color,kicker,label="DOSSIER",ac
     {tab.callout&&<div className="cd-callout"><b>{tab.callout.title||"À retenir"}</b><span>{tab.callout.text}</span></div>}
     {images.length>1||(images[0]?.pages.length??0)>1?<div className="cd-gallery">{images.flatMap(d=>d.pages.map(p=>({d,p}))).slice(1).map(({d,p})=><PageImage key={p.image} path={p.image} label={`${d.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')} · page ${p.number}`}/>)}</div>:null}
    </section>})()}
+   {id==="quiz"&&<section>
+    <Quiz questions={questions} heading={`${n(current)} · QUIZ · TESTEZ VOS CONNAISSANCES`} onReview={()=>setActive(0)}/>
+   </section>}
    {id==="docs"&&<section>
     <div className="cd-heading"><span>{n(current)} · {label}</span><h2>Documents à télécharger</h2><p>Retrouvez ici les documents d’origine de ce contenu.</p></div>
     <ul className="cd-downloads">{docs.map((d,i)=><DownloadRow key={d.id} doc={d} index={i}/>)}</ul>
