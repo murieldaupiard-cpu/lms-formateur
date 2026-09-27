@@ -42,3 +42,9 @@
 .competence-intro-builder .intro-reac-import i{grid-row:span 2;display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#72c9ff;color:#071528;font-style:normal;font-size:24px;font-weight:900}
 .competence-intro-builder .intro-reac-import strong{font-size:14px!important;letter-spacing:.06em;color:#fff}
 .competence-intro-builder .intro-reac-import span{font-size:12px!important;color:#b9d9ef!important}
+
+/* L'Arène dans le studio */
+.arena-builder{display:grid;gap:14px;margin-top:6px}
+.arena-builder>p{margin:0;color:#b9d9ef;font-size:13px}
+.arena-preview{display:grid;gap:10px;margin-top:6px}
+.arena-preview>small{color:#72c9ff;font-size:10px;font-weight:900;letter-spacing:.16em}
