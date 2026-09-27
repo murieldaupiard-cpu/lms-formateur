@@ -1,0 +1,151 @@
+:root{--gold:#f8c84e;--felt:#075846;--ink:#07100f}.casino-entry,.casino-results,.casino-game{min-height:100vh;color:#fff;font-family:Inter,ui-sans-serif,sans-serif;background:#070909}.casino-entry{position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 45%,#173d35,#090d0c 56%,#030404)}.entry-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,#000 82%),repeating-linear-gradient(90deg,transparent 0 80px,#ffffff03 81px)}.casino-entry:before,.casino-entry:after{content:"";position:absolute;width:420px;height:420px;border:1px solid #f8c84e1f;border-radius:50%;box-shadow:0 0 0 45px #f8c84e08,0 0 0 90px #f8c84e05}.casino-entry:before{left:-230px;bottom:-230px}.casino-entry:after{right:-230px;top:-230px}.casino-back{position:absolute;z-index:5;left:34px;top:30px;color:#d8c98f;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.14em}.casino-entry section,.casino-results section{position:relative;z-index:2;width:min(720px,90vw);text-align:center}.casino-kicker,.casino-results section>span{color:#d4b35e;font-size:10px;font-weight:900;letter-spacing:.25em}.casino-entry h1{margin:20px 0 25px;font:500 clamp(70px,12vw,145px)/.72 Georgia,serif;letter-spacing:-.06em;text-shadow:0 15px 35px #000}.casino-entry h1 b{color:var(--gold);font-weight:500}.casino-entry p{max-width:590px;margin:0 auto;color:#b9c8c2;font-size:15px;line-height:1.7}.entry-rules{display:flex;justify-content:center;gap:8px;margin:28px 0}.entry-rules span{padding:8px 12px;border:1px solid #947d3d;border-radius:99px;background:#131916;color:#e5d69c;font-size:8px;font-weight:900;letter-spacing:.1em}.casino-entry button,.result-actions button{border:1px solid #ffe08a;border-radius:8px;padding:17px 23px;background:linear-gradient(180deg,#f5d46d,#b88722);box-shadow:0 8px 0 #5e400b,0 16px 35px #0009;color:#151003;font-size:10px;font-weight:1000;letter-spacing:.12em}.casino-entry button b{margin-left:24px;font-size:17px}.casino-entry small{display:block;margin-top:22px;color:#65736d;font-size:8px;letter-spacing:.08em}.casino-game{height:100vh;min-height:720px;display:grid;grid-template-rows:64px 1fr 105px;overflow:hidden;background:radial-gradient(circle at 50% 20%,#352115,#090909 48%,#020202)}.casino-game>header{display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid #b98a352e;background:#080a09dd;position:relative;z-index:10}.casino-game>header a,.casino-game>header button{border:0;background:transparent;color:#b9a975;font-size:9px;font-weight:900;letter-spacing:.12em;text-decoration:none}.casino-game>header>div{text-align:center}.casino-game>header b,.casino-game>header span{display:block}.casino-game>header b{font:600 18px Georgia,serif;letter-spacing:.14em;color:#f6d67b}.casino-game>header span{margin-top:3px;color:#73857e;font-size:7px;letter-spacing:.18em}.casino-room{position:relative;min-height:0;overflow:hidden;perspective:1200px}.dealer{position:absolute;z-index:4;left:50%;top:15px;transform:translateX(-50%);text-align:center}.dealer-face{width:78px;height:78px;display:grid;place-items:center;margin:auto;border:2px solid #d6b65c;border-radius:50%;background:radial-gradient(circle at 50% 32%,#d9ad8f 0 22%,#30231d 23% 37%,#111 38%);box-shadow:0 0 30px #e5b94224}.dealer-face span{margin-top:38px;color:#e8ca71}.dealer>b,.dealer>small{display:block}.dealer>b{margin-top:6px;color:#d9bc69;font-size:8px;letter-spacing:.14em}.dealer>small{margin-top:3px;color:#a9b6b1;font:italic 10px Georgia,serif}.opponent{position:absolute;z-index:4;width:125px;text-align:center;transition:.35s}.opponent.o1{left:6%;top:16%}.opponent.o2{right:6%;top:16%}.opponent.o3{left:3%;bottom:8%}.opponent.o4{right:3%;bottom:8%}.avatar{width:58px;height:58px;display:grid;place-items:center;margin:auto;border:2px solid #816f3c;border-radius:50%;background:radial-gradient(circle at 50% 36%,#bc866e 0 25%,#18130f 26% 45%,#0b0c0b 46%);box-shadow:0 8px 20px #000;color:#f6d99a;font:600 17px Georgia,serif}.o2 .avatar{background:radial-gradient(circle at 50% 36%,#7f503d 0 25%,#100e0c 26% 45%,#090a09 46%)}.o3 .avatar{background:radial-gradient(circle at 50% 36%,#c6977c 0 25%,#402c22 26% 45%,#0b0c0b 46%)}.o4 .avatar{background:radial-gradient(circle at 50% 36%,#9d7059 0 25%,#302d2b 26% 45%,#0b0c0b 46%)}.opponent>b,.opponent>small{display:block}.opponent>b{margin-top:5px;font-size:9px}.opponent>small{margin-top:3px;color:#788a83;font-size:6px;letter-spacing:.08em}.opponent>i{position:absolute;right:15px;top:0;font-style:normal;font-size:25px;opacity:0;transform:scale(.4)}.opponent.win{animation:playerCheer .75s ease}.opponent.loss{animation:playerReact .7s ease}.opponent.win i,.opponent.loss i{animation:reactionPop 1.5s ease}.poker-table{width:min(860px,68vw);height:78%;position:absolute;left:50%;bottom:-6%;transform:translateX(-50%) rotateX(10deg);border:10px solid #382217;border-radius:47% 47% 42% 42%;background:radial-gradient(ellipse at center,#0b7059,#064938 68%,#033329);box-shadow:inset 0 0 0 3px #bd963f,inset 0 0 70px #001c16,0 28px 65px #000;overflow:hidden}.poker-table:after{content:"";position:absolute;inset:25px;border:1px solid #d8bc6852;border-radius:inherit;pointer-events:none}.table-mark{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);color:#d5c07417;font:700 40px Georgia,serif;letter-spacing:.08em}.hand-info{position:absolute;z-index:2;left:50%;top:18px;width:70%;transform:translateX(-50%);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;color:#d8d4bf;font-size:7px;font-weight:900;letter-spacing:.1em}.hand-info>div{height:3px;border-radius:5px;background:#ffffff1e;overflow:hidden}.hand-info i{display:block;height:100%;background:#e9c45d}.question-card{width:min(610px,82%);position:absolute;z-index:3;left:50%;top:54%;transform:translate(-50%,-50%);padding:19px;border:1px solid #e1c56a9c;border-radius:16px;background:#071510e8;box-shadow:0 14px 35px #001f18}.question-card>span{color:#d9bd65;font-size:7px;font-weight:900;letter-spacing:.17em}.question-card h2{min-height:44px;margin:8px auto 14px;font:500 clamp(15px,1.5vw,21px)/1.25 Georgia,serif}.answer-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.answer-cards button{min-height:67px;display:flex;align-items:center;gap:8px;padding:8px;border:1px solid #35594f;border-radius:9px;background:#0b211b;color:#d9e4df;text-align:left}.answer-cards button>b{flex:none;width:25px;height:25px;display:grid;place-items:center;border:1px solid #9a823d;border-radius:50%;color:#edcf72}.answer-cards button span{font-size:9px;line-height:1.25}.answer-cards button.selected{border-color:#f2c957;background:#20382b;box-shadow:0 0 18px #e5b94026}.answer-cards button.correct{border-color:#63dc9e;background:#164e38}.answer-cards button.wrong{border-color:#dc6671;background:#52272c}.answer-reveal{margin-top:12px;padding:9px 12px;border-radius:8px;background:#0a1d18;text-align:left}.answer-reveal strong{color:#67dda3;font-size:9px;letter-spacing:.08em}.answer-reveal.loss strong{color:#f28a91}.answer-reveal p{margin:5px 0 0;color:#9eb0aa;font-size:8px;line-height:1.4}.chip-pot{position:absolute;z-index:4;left:50%;bottom:30px;transform:translateX(-50%);width:54px;height:24px;display:grid;place-items:center;border:3px dashed #f0c75d;border-radius:50%;background:#9a232d;box-shadow:0 5px 0 #4e1116;color:#fff;font-size:9px;font-weight:900}.chip-pot.win{animation:chipsWin .7s ease}.chip-pot.loss{animation:chipsLoss .7s ease}.betting-dock{position:relative;z-index:8;display:grid;grid-template-columns:170px 1fr 180px;align-items:center;gap:18px;padding:14px 30px;border-top:1px solid #ad873f4a;background:#080b0aeF;box-shadow:0 -15px 40px #0008}.wallet small,.wallet strong{display:block}.wallet small,.bets>small{color:#8c9b95;font-size:7px;font-weight:900;letter-spacing:.14em}.wallet strong{margin-top:4px;color:#f2cf68;font:500 28px Georgia,serif}.bets{text-align:center}.bets>div{display:flex;justify-content:center;gap:7px;margin-top:8px}.bets button{min-width:47px;padding:9px 10px;border:1px solid #655b37;border-radius:50px;background:#181b18;color:#c8c6b8;font-size:8px;font-weight:900}.bets button.active{border-color:#f2ce62;background:#72571d;color:#fff;box-shadow:0 0 18px #e9bd4936}.bets button:disabled{opacity:.3}.bets .all-in{border-color:#8b3440;color:#ef8d97}.bets .all-in.active{background:#8e2631;border-color:#ef717e}.deal{height:52px;border:1px solid #ffe08a;border-radius:8px;background:linear-gradient(#f2d269,#a8791f);box-shadow:0 6px 0 #583c0b;color:#171105;font-size:9px;font-weight:1000;letter-spacing:.1em}.deal:disabled{opacity:.35;filter:grayscale(1)}.deal b{margin-left:15px}.deal.next{background:linear-gradient(#61dca2,#278359);border-color:#8df0bf;box-shadow:0 6px 0 #155137}.casino-results{position:relative;display:grid;place-items:center;background:radial-gradient(circle at 50% 38%,#174d3e,#070a09 62%)}.result-crown{width:90px;height:90px;display:grid;place-items:center;margin:auto;border:1px solid #e7c65e;border-radius:50%;background:#10261f;color:#f1cd62;font-size:45px;box-shadow:0 0 45px #e8bd4230}.casino-results h1{margin:20px 0 5px;font:500 clamp(35px,6vw,70px) Georgia,serif;color:#f4d270}.result-money{font:500 clamp(75px,10vw,125px) Georgia,serif;color:#fff}.casino-results p{color:#9db0a8}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:28px 0}.result-grid div{padding:18px;border:1px solid #4d665d;border-radius:10px;background:#0b1b16}.result-grid strong,.result-grid small{display:block}.result-grid strong{color:#f0cf6b;font:500 23px Georgia,serif}.result-grid small{margin-top:5px;color:#798a84;font-size:7px;letter-spacing:.1em}.result-actions{display:flex;justify-content:center;gap:12px}.result-actions a{display:grid;place-items:center;padding:15px 20px;border:1px solid #52665e;border-radius:8px;color:#c1cec9;text-decoration:none;font-size:9px;font-weight:900;letter-spacing:.08em}@keyframes playerCheer{50%{transform:translateY(-11px)}}@keyframes playerReact{35%{transform:rotate(-4deg)}65%{transform:rotate(4deg)}}@keyframes reactionPop{20%,75%{opacity:1;transform:scale(1)}}@keyframes chipsWin{50%{transform:translate(-50%,55px) scale(1.18)}}@keyframes chipsLoss{50%{transform:translate(-50%,-50px) scale(.8);opacity:.35}}@media(max-width:900px){.casino-game{height:auto;min-height:100vh;grid-template-rows:60px 1fr auto}.casino-room{min-height:700px}.poker-table{width:94vw;height:65%;bottom:6%}.opponent.o1,.opponent.o3{left:1%}.opponent.o2,.opponent.o4{right:1%}.dealer{top:20px}.betting-dock{grid-template-columns:1fr 1fr;padding:14px}.bets{grid-column:1/-1;grid-row:1}.wallet{grid-row:2}.deal{grid-row:2}.question-card{top:50%}}@media(max-width:600px){.casino-room{min-height:760px}.opponent{width:80px}.avatar{width:45px;height:45px}.opponent.o3,.opponent.o4{bottom:3%}.poker-table{height:67%;bottom:10%;border-width:6px}.question-card{width:79%;padding:13px}.answer-cards{grid-template-columns:1fr}.answer-cards button{min-height:43px}.question-card h2{font-size:15px}.chip-pot{bottom:18px}.betting-dock{grid-template-columns:1fr 1fr}.bets button{min-width:40px;padding:8px 7px}.casino-entry h1{font-size:72px}.entry-rules{flex-wrap:wrap}.result-grid{grid-template-columns:1fr}.result-actions{flex-direction:column}}
+:root{--casino-ui-adjusted:1}
+
+/* Full-screen table and readability pass */
+.casino-game{height:100dvh;min-height:0;grid-template-rows:58px minmax(0,1fr) 94px}
+.casino-room{min-height:0}
+.dealer{top:7px}
+.dealer-face{width:66px;height:66px}
+.dealer-face span{margin-top:31px}
+.dealer>b,.dealer>small,.opponent>b,.opponent>small{text-shadow:0 2px 6px #000}
+.dealer>b{margin-top:4px;color:#f5d87f;font-size:10px;letter-spacing:.15em}
+.dealer>small{min-width:210px;margin:4px 0 0 50%;transform:translateX(-50%);color:#eef3f0;font-size:13px;font-weight:600}
+.opponent>b{margin-top:5px;color:#fff0c0;font-size:12px;letter-spacing:.04em}
+.opponent>small{min-height:24px;margin-top:4px;color:#dbe4e0;font-size:9px;font-weight:800;line-height:1.25;letter-spacing:.05em}
+.opponent>i{z-index:8;right:-2px;top:-19px;font-size:52px;filter:drop-shadow(0 6px 10px #000)}
+.opponent.win,.opponent.loss{animation-duration:1.3s}
+.opponent.win i,.opponent.loss i{animation-duration:3.2s}
+.poker-table{height:74%;bottom:0}
+.betting-dock{padding-top:10px;padding-bottom:10px}
+
+@media(max-height:760px) and (min-width:901px){
+ .casino-game{grid-template-rows:52px minmax(0,1fr) 86px}
+ .dealer{top:3px}.dealer-face{width:54px;height:54px}.dealer-face span{margin-top:25px}
+ .dealer>small{font-size:11px}.avatar{width:49px;height:49px}.opponent>b{font-size:11px}
+ .opponent.o1,.opponent.o2{top:13%}.opponent.o3,.opponent.o4{bottom:4%}
+ .poker-table{height:73%;bottom:0}.question-card{top:51%;padding:14px}.question-card h2{margin-bottom:10px}
+ .answer-cards button{min-height:57px}.chip-pot{bottom:20px}.wallet strong{font-size:24px}
+}
+
+@media(max-width:900px){
+ .casino-game{height:100dvh;min-height:0;grid-template-rows:56px minmax(0,1fr) 112px;overflow:hidden}
+ .casino-room{min-height:0}.poker-table{height:72%;bottom:1%}
+ .betting-dock{position:relative;padding:8px 12px}
+}
+
+
+/* Make betting an unmistakable second step */
+.bets>small{display:block;color:#f6d778;font-size:9px;letter-spacing:.16em}
+.bets>em{display:block;margin-top:4px;color:#dce6e2;font-size:9px;font-style:normal;font-weight:700}
+.bets button{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.bets button:not(:disabled):hover{transform:translateY(-3px) scale(1.06);border-color:#f4d66f;box-shadow:0 5px 18px #e9bd4945}
+.betting-dock.needs-bet .bets{margin:-5px 0;padding:9px 14px;border:2px solid #f4cf61;border-radius:12px;background:#6d541d3d;box-shadow:0 0 28px #f2c8574d;animation:betAttention 1.15s ease-in-out infinite}
+.betting-dock.needs-bet .bets>small{color:#ffe38a;font-size:11px}
+.betting-dock.needs-bet .bets>em{color:#fff}
+.chip-pot.awaiting{width:62px;border-color:#ffe486;background:#372d17;color:#ffe486;animation:betGlow 1.15s ease-in-out infinite}
+.deal:disabled{cursor:not-allowed}
+@keyframes betAttention{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.035);filter:brightness(1.22)}}
+@keyframes betGlow{0%,100%{filter:brightness(1);box-shadow:0 5px 0 #4e1116}50%{filter:brightness(1.35);box-shadow:0 5px 0 #4e1116,0 0 24px #ffe486}}
+
+@media(max-width:900px){
+ .bets>em{font-size:8px}
+ .betting-dock.needs-bet .bets{margin:0;padding:7px 8px}
+}
+
+
+/* Four balanced answers and a clear total-question counter */
+.question-card>span{display:inline-block;padding:6px 10px;border:1px solid #d9bd6566;border-radius:999px;background:#d9bd6512;color:#f4d779;font-size:9px;letter-spacing:.15em}
+.answer-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.answer-cards button{min-height:58px}
+.hand-info>span{color:#ffe080;font-size:9px}
+@media(max-width:600px){
+ .answer-cards{grid-template-columns:1fr 1fr}
+ .answer-cards button{min-height:50px}
+ .answer-cards button span{font-size:8px}
+}
+
+
+/* Keep all four answers and the full betting panel visible */
+.question-card{top:50%;padding:14px 17px}
+.question-card h2{min-height:0;margin:7px auto 10px}
+.answer-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.answer-cards button{min-height:50px}
+.answer-cards button:nth-child(4) b::after{content:"";position:absolute}
+.betting-dock.betting-open{grid-template-columns:170px minmax(0,1fr)}
+.betting-dock.betting-open .bets{grid-column:2}
+.betting-dock .bets>div{flex-wrap:wrap}
+.betting-dock .bets button{min-width:64px;padding:10px 13px;font-size:10px}
+.betting-dock.needs-bet .bets{animation:betGlowPanel 1.15s ease-in-out infinite}
+@keyframes betGlowPanel{0%,100%{filter:brightness(1);box-shadow:0 0 18px #f2c85735}50%{filter:brightness(1.2);box-shadow:0 0 34px #f2c85775}}
+
+@media(max-height:760px) and (min-width:901px){
+ .question-card{top:49%;padding:10px 14px}
+ .answer-cards button{min-height:45px}
+}
+@media(max-width:900px){
+ .betting-dock.betting-open{grid-template-columns:120px minmax(0,1fr)}
+ .betting-dock.betting-open .bets{grid-column:2;grid-row:1/3}
+}
+@media(max-width:600px){
+ .question-card{top:48%;width:84%;padding:10px}
+ .question-card h2{font-size:13px}
+ .answer-cards{grid-template-columns:1fr 1fr}
+ .answer-cards button{display:grid;grid-template-columns:25px 1fr;min-height:44px;padding:6px}
+ .betting-dock.betting-open{grid-template-columns:84px minmax(0,1fr)}
+ .betting-dock .bets button{min-width:52px;padding:8px 9px}
+}
+
+
+/* Stable three-choice layout and fixed betting panel */
+.answer-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.betting-dock.needs-bet .bets,.chip-pot.awaiting{animation:none!important}
+.betting-dock.needs-bet .bets{border:2px solid #f4cf61;background:#3b321a;filter:none;box-shadow:0 0 18px #f2c85735}
+.betting-dock.betting-open .bets{display:block}
+@media(max-width:600px){
+ .answer-cards{grid-template-columns:1fr}
+ .answer-cards button{display:flex;min-height:42px}
+}
+
+
+/* Restore the original A-B-C arrangement on one horizontal row */
+.answer-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.answer-cards button{display:flex!important;min-height:58px}
+@media(max-width:600px){
+ .answer-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px}
+ .answer-cards button{display:flex!important;min-height:52px;padding:5px;gap:4px}
+ .answer-cards button>b{width:22px;height:22px}
+ .answer-cards button span{font-size:7px}
+}
+
+
+/* Prevent the question counter and betting panel from being cropped */
+.casino-game{grid-template-rows:58px minmax(0,1fr) 122px!important}
+.poker-table{height:72%;bottom:0}
+.hand-info{top:12px!important;z-index:12!important;width:76%;padding:5px 9px;border-radius:999px;background:#032d24d9;box-shadow:0 3px 12px #001b16}
+.hand-info>span{position:relative;z-index:13;white-space:nowrap;color:#ffe17d!important;font-size:10px!important}
+.hand-info>b{white-space:nowrap}
+.betting-dock{min-height:122px!important;box-sizing:border-box;overflow:visible;padding:12px 30px!important}
+.betting-dock.betting-open{grid-template-columns:170px minmax(0,1fr)!important}
+.betting-dock .bets{min-width:0;margin:0!important;padding:10px 14px!important;box-sizing:border-box}
+.betting-dock .bets>div{flex-wrap:nowrap!important}
+.betting-dock .bets button{flex:0 1 76px}
+.betting-dock.needs-bet .bets{transform:none!important}
+
+@media(max-height:760px) and (min-width:901px){
+ .casino-game{grid-template-rows:52px minmax(0,1fr) 116px!important}
+ .betting-dock{min-height:116px!important;padding:8px 24px!important}
+ .poker-table{height:70%;bottom:0}
+ .hand-info{top:8px!important}
+}
+@media(max-width:900px){
+ .casino-game{grid-template-rows:56px minmax(0,1fr) 142px!important}
+ .betting-dock{min-height:142px!important;padding:8px 12px!important}
+ .betting-dock.betting-open{grid-template-columns:100px minmax(0,1fr)!important}
+ .betting-dock.betting-open .bets{grid-column:2!important;grid-row:1!important}
+ .betting-dock .bets>div{flex-wrap:wrap!important}
+ .poker-table{height:69%;bottom:0}
+}
+.casino-team-draw{display:grid;justify-items:center}.casino-wheel{position:relative;width:min(310px,72vw);aspect-ratio:1;margin:24px auto 18px;border:10px solid #e8d7a3;border-radius:50%;background:conic-gradient(#f3c653 0 25%,#8d52ba 25% 50%,#f3c653 50% 75%,#8d52ba 75%);box-shadow:0 0 0 8px #17211d,0 25px 60px #000;overflow:hidden}.casino-wheel:before{content:"";position:absolute;z-index:4;left:50%;top:-2px;transform:translateX(-50%);border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #fff4c7}.casino-wheel:after{content:"♠";position:absolute;z-index:3;inset:37%;display:grid;place-items:center;border:7px solid #e7cc77;border-radius:50%;background:#08120e;color:#f4ca55;font-size:34px}.casino-wheel>div{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:center}.casino-wheel b{color:#120c14;font-size:10px;letter-spacing:.1em}.casino-wheel b:nth-child(1),.casino-wheel b:nth-child(4){transform:rotate(45deg)}.casino-wheel b:nth-child(2),.casino-wheel b:nth-child(3){transform:rotate(-45deg)}.casino-team-draw.spinning.draw-gold .casino-wheel{animation:casinoWheelGold 2.3s cubic-bezier(.12,.7,.08,1) forwards}.casino-team-draw.spinning.draw-purple .casino-wheel{animation:casinoWheelPurple 2.3s cubic-bezier(.12,.7,.08,1) forwards}.casino-team-draw.revealed .casino-wheel{width:min(250px,65vw);transition:.4s}.casino-team-draw h2{margin:4px 0 8px;font:500 clamp(38px,8vw,72px) Georgia,serif}.casino-team-draw.revealed h2{animation:casinoTeamReveal .6s both;color:#f4ca55}.casino-team-draw.revealed.draw-purple h2{color:#c895ee}.casino-team-draw p{font-size:13px}.casino-team-draw.draw-gold.revealed .casino-wheel{transform:rotate(720deg)}.casino-team-draw.draw-purple.revealed .casino-wheel{transform:rotate(765deg)}@keyframes casinoWheelGold{to{transform:rotate(720deg)}}@keyframes casinoWheelPurple{to{transform:rotate(765deg)}}@keyframes casinoTeamReveal{0%{opacity:0;transform:scale(.65)}70%{transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}@media(max-width:600px){.casino-wheel{margin-top:18px}.casino-team-draw h2{font-size:42px}.casino-team-draw p{padding:0 14px}.casino-game>header>div span{font-size:6px}}
+.casino-team-draw{position:relative}.casino-team-draw:after{content:"▼";position:absolute;z-index:30;top:25px;left:50%;transform:translateX(-50%);color:#fff0b0;font-size:38px;line-height:1;filter:drop-shadow(0 4px 5px #000)}.casino-wheel:before{content:none!important}
+.casino-wheel b{font-size:0!important}.casino-wheel b:after{font-size:10px;letter-spacing:.1em}.casino-wheel b:nth-child(1):after{content:"PURPLE"}.casino-wheel b:nth-child(2):after{content:"GOLD"}.casino-wheel b:nth-child(3):after{content:"GOLD"}.casino-wheel b:nth-child(4):after{content:"PURPLE"}.casino-team-draw.spinning.draw-gold .casino-wheel{animation:casinoWheelGoldCentered 2.3s cubic-bezier(.12,.7,.08,1) forwards!important}.casino-team-draw.spinning.draw-purple .casino-wheel{animation:casinoWheelPurpleCentered 2.3s cubic-bezier(.12,.7,.08,1) forwards!important}.casino-team-draw.revealed.draw-gold .casino-wheel{transform:rotate(1035deg)!important}.casino-team-draw.revealed.draw-purple .casino-wheel{transform:rotate(1125deg)!important}@keyframes casinoWheelGoldCentered{to{transform:rotate(1035deg)}}@keyframes casinoWheelPurpleCentered{to{transform:rotate(1125deg)}}
+

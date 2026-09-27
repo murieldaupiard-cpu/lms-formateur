@@ -1,0 +1,4 @@
+/* Intégration LMS des jeux repris de CADGA : ils s'affichent dans la page (objectif pédagogique, aperçu formateur). */
+.game-embed{border-radius:22px;overflow:hidden;border:1px solid #ffffff14;isolation:isolate}
+.game-embed footer{min-height:0}
+.game-embed a{cursor:pointer}
