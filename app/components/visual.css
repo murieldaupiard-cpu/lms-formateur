@@ -40,3 +40,11 @@
 .illustration-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;border-top:1px solid #ffffff14}
 .illustration-row span{flex:1 1 200px;min-width:0;overflow-wrap:anywhere}
 .illustration-panel [role=status]{margin:0;font-size:14px;color:#a3b7c9}
+.presentation-intro{display:grid;gap:12px;min-width:0}
+.presentation-intro small{font-size:11px;letter-spacing:.18em;color:#72c9ff}
+.presentation-intro h2{margin:0;font-family:Georgia,serif;font-size:clamp(24px,4vw,34px);line-height:1.2;color:#fff;overflow-wrap:anywhere}
+.presentation-intro>p{margin:0;font-size:16px;line-height:1.7;color:#d9e4ed}
+.presentation-objectives{display:grid;gap:6px;padding:16px 18px;border-radius:14px;border:1px solid #6ed66f55;background:#6ed66f10}
+.presentation-objectives strong{color:#fff;font-family:Georgia,serif;font-size:18px}.presentation-objectives span{font-size:14px;color:#a3b7c9}
+.presentation-objectives ol{margin:4px 0 0;padding-left:22px;display:grid;gap:6px;line-height:1.5;color:#d9e4ed}
+.mm-explanation,.ig-explanation,.section-explanation{margin:0;font-size:14px;line-height:1.6;color:#c4d3df}

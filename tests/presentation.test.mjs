@@ -36,3 +36,10 @@ test('AI can recommend a mind map or infographic, including for a REAC',()=>{
  assert.equal(normalizeProposal({summary:'x',recommendedModel:'dossier',blocks:[{title:'A',items:['a']}]},'src').recommendedModel,undefined);
  assert.equal(recommendedModel({sections:[{type:'context',items:['a']}],metrics:['18 salariés','1,2 M€'],timeline:['2012']}),'infographic');
 });
+
+test('competence presentations are explicit: exact title, explanation, objectives',()=>{
+ const purpose=presentationPurpose('Assurer l’accueil physique et téléphonique','',true,'mindmap');
+ assert.match(purpose,/intitulé exact/);assert.match(purpose,/objectives/);assert.match(purpose,/Être capable de/);assert.match(purpose,/explanation/);
+ const p=normalizeProposal({title:'Accueil',summary:'Texte.',objectives:['Être capable d’accueillir',3],blocks:[{title:'Contexte',explanation:'Où et comment.',items:['Tous secteurs']}]},'src');
+ assert.equal(p.title,'Accueil');assert.deepEqual(p.objectives,['Être capable d’accueillir']);assert.equal(p.sections[0].explanation,'Où et comment.');
+});
