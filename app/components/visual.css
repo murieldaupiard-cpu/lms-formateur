@@ -20,7 +20,7 @@
 .mm2-node h3{display:flex;gap:8px;align-items:baseline;font-size:16px;line-height:1.3}
 .mm2-leaves{display:grid;gap:8px;min-width:0;justify-items:start}
 .mm2-leaves li{padding:6px 12px;border-radius:999px;font-size:13.5px;line-height:1.4;background:#0f1f33;border:1px solid color-mix(in srgb,var(--branch) 45%,transparent);box-shadow:inset 0 0 0 999px color-mix(in srgb,var(--branch) 12%,transparent);overflow-wrap:anywhere;max-width:100%}
-@media (max-width:640px){.mm2-branch,.mm2-left{grid-template-columns:minmax(0,1fr)}.mm2-leaves{padding-left:44px}.mm2-tree .mm2-center{max-width:130px;padding:12px}.mm2-tree .mm2-center strong{font-size:14px}.mm2-tree .mm2-side{padding-left:84px}}
+@media (max-width:640px){.mm2-branch,.mm2-left{grid-template-columns:minmax(0,1fr)}.visual-presentation .mm2-leaves{padding-left:44px}.mm2-tree .mm2-center{max-width:130px;padding:12px}.mm2-tree .mm2-center strong{font-size:14px}.mm2-tree .mm2-side{padding-left:84px}}
 .ig-head{display:grid;gap:8px}.ig-head small{font-size:11px;letter-spacing:.18em;color:#72c9ff}.ig-head p{margin:0;font-family:Georgia,serif;font-size:20px;line-height:1.5;color:#fff}
 .ig-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px}
 .ig-kpi{display:grid;gap:4px;padding:18px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff1f;border-left:4px solid var(--branch);min-width:0}
