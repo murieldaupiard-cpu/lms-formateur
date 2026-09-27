@@ -244,6 +244,7 @@ export const EN: Record<string, string> = {
  "Présentez le contexte, le référentiel et les compétences visées avant la première séquence.": "Present the context, the framework and the target competences before the first sequence.",
  "IMPORTER LES DOCUMENTS / RÉFÉRENTIELS": "IMPORT DOCUMENTS / FRAMEWORKS",
  "PDF, Word ou image": "PDF, Word or image",
+ "PDF, Word ou image · plusieurs fichiers possibles": "PDF, Word or image · several files allowed",
  "RÉFÉRENTIEL IMPORTÉ": "FRAMEWORK IMPORTED",
  "Prêt pour analyse": "Ready for analysis",
  "ANALYSE…": "ANALYSING…",

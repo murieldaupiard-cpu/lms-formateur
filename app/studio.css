@@ -2,13 +2,6 @@
 .activity-tool-card.selected{border-color:#72c9ff!important;box-shadow:0 0 0 2px #72c9ff66,0 18px 40px #0006!important;background:linear-gradient(145deg,#15375a,#0b2139)!important}.activity-tool-card.selected>b{color:#72c9ff}.activity-tool-card:focus-visible{outline:2px solid #72c9ff;outline-offset:3px}.activity-choice-note{margin:16px 0 0;padding:14px 16px;border:1px solid #72c9ff44;border-radius:12px;background:#72c9ff12;color:#d9e4ed;line-height:1.5}
 /* Parcours apprenant : page d’entrée de la compétence. */
 .learner-competence-landing{margin-bottom:22px}.learner-competence-landing small{font-size:10px;letter-spacing:.18em;font-weight:900;color:#6fd1ff}.learner-competence-landing h1{margin:8px 0 6px;font:500 clamp(30px,4vw,44px) Georgia,serif;color:#f7fafc}.learner-competence-landing p{margin:0;color:#8da4b8;font-size:14px}
-.learner-competence-card{--seq:#7c3aed;appearance:none;cursor:pointer;display:grid;gap:12px;width:min(100%,560px);min-height:260px;align-content:end;padding:30px;border:1px solid color-mix(in srgb,var(--seq) 70%,#4d6880);border-radius:22px;background:radial-gradient(circle at 85% 10%,color-mix(in srgb,var(--seq) 55%,transparent),transparent 55%),linear-gradient(150deg,color-mix(in srgb,var(--seq) 45%,#0b2236),#0b1a2a);color:#fff;text-align:left;box-shadow:0 18px 40px color-mix(in srgb,var(--seq) 22%,transparent);transition:transform .22s ease,box-shadow .22s ease}
-.learner-competence-card:hover{transform:translateY(-5px);box-shadow:0 24px 50px color-mix(in srgb,var(--seq) 35%,transparent)}
-.learner-competence-card:focus-visible{outline:2px solid #fff;outline-offset:4px}
-.learner-competence-card small{font-size:10px;font-weight:900;letter-spacing:.18em;color:color-mix(in srgb,var(--seq) 35%,#fff)}
-.learner-competence-card h2{margin:0;font:500 clamp(26px,3.5vw,38px)/1.15 Georgia,serif;overflow-wrap:anywhere}
-.learner-competence-card span{font-size:11px;font-weight:900;letter-spacing:.1em;color:#dbe6f0}
-.learner-competence-card em{justify-self:start;margin-top:6px;padding:11px 16px;border-radius:10px;background:#ffffff1a;border:1px solid #ffffff33;font-style:normal;font-size:11px;font-weight:900;letter-spacing:.06em}
 .learner-modules-head h1{font-family:Georgia,serif;font-size:clamp(28px,4vw,40px);margin:8px 0 5px;color:#f7fafc}
 
 /* Sélecteur de langue FR / EN */
@@ -28,3 +21,24 @@
 .studio-wizard-nav button.active{opacity:1;border-color:#72c9ff;background:rgba(114,201,255,.14)}
 .studio-wizard-nav button.active b{background:#72c9ff;color:#071528}
 @media (max-width:640px){.studio-wizard-nav i{display:none}.studio-wizard-nav button{padding:6px 10px 6px 6px}}
+
+/* Carte de la compétence (côté apprenant), sur le modèle des jours CADGA */
+.learner-competence-card{--seq:#72c9ff;appearance:none;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:28px;width:100%;padding:34px 40px;border:1px solid #29445e;border-radius:18px;background:#0e1c2e;color:#f7fafc;text-align:left;transition:border-color .2s,transform .2s,box-shadow .2s}
+.learner-competence-card:hover{border-color:var(--seq);transform:translateY(-2px);box-shadow:0 12px 30px #0006}
+.learner-competence-card:focus-visible{outline:2px solid var(--seq);outline-offset:4px}
+.learner-competence-card .lcc-num{display:grid;place-items:center;width:86px;height:86px;border:1px solid #29445e;border-radius:14px;color:var(--seq);font:500 32px Georgia,serif}
+.learner-competence-card .lcc-body{display:grid;gap:10px;min-width:0}
+.learner-competence-card strong{font:700 clamp(22px,2.6vw,30px)/1.2 Georgia,serif;overflow-wrap:anywhere}
+.learner-competence-card .lcc-desc{color:#b9c7d4;font-size:15px;line-height:1.5}
+.learner-competence-card small{color:#8a9bb0;font-size:11px;font-weight:900;letter-spacing:.14em}
+.learner-competence-card .lcc-status{align-self:start;padding:8px 14px;border-radius:999px;background:#ffffff0d;color:var(--seq);font-size:10px;font-weight:900;letter-spacing:.14em;white-space:nowrap}
+.learner-competence-card .lcc-arrow{color:var(--seq);font-size:28px}
+@media (max-width:700px){.learner-competence-card{grid-template-columns:auto minmax(0,1fr);gap:16px;padding:22px}.learner-competence-card .lcc-num{width:56px;height:56px;font-size:22px}.learner-competence-card .lcc-status{grid-column:2;justify-self:start}.learner-competence-card .lcc-arrow{display:none}}
+
+/* Bouton d'import des documents / référentiels, bien visible */
+.competence-intro-builder .intro-reac-import{display:grid!important;grid-template-columns:auto 1fr!important;align-items:center!important;column-gap:16px!important;row-gap:4px!important;padding:22px 24px!important;margin:4px 0 16px!important;border:2px solid #72c9ff!important;border-radius:16px!important;background:linear-gradient(135deg,#72c9ff26,#72c9ff0d)!important;box-shadow:0 10px 26px #72c9ff1f!important;transition:transform .2s,box-shadow .2s,background .2s!important}
+.competence-intro-builder .intro-reac-import:hover{transform:translateY(-2px);background:linear-gradient(135deg,#72c9ff40,#72c9ff14)!important;box-shadow:0 14px 32px #72c9ff33!important}
+.competence-intro-builder .intro-reac-import:focus-within{outline:2px solid #72c9ff;outline-offset:3px}
+.competence-intro-builder .intro-reac-import i{grid-row:span 2;display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#72c9ff;color:#071528;font-style:normal;font-size:24px;font-weight:900}
+.competence-intro-builder .intro-reac-import strong{font-size:14px!important;letter-spacing:.06em;color:#fff}
+.competence-intro-builder .intro-reac-import span{font-size:12px!important;color:#b9d9ef!important}
