@@ -12,7 +12,7 @@ export function PresentationIntro({proposal,hideTitle}:{proposal:any;hideTitle?:
  return <header className="presentation-intro">
   {!hideTitle&&proposal?.title&&<><small>{competence?"COMPÉTENCE":"CONTENU PÉDAGOGIQUE"}</small><h2>{proposal.title}</h2></>}
   {proposal?.intro&&<p>{proposal.intro}</p>}
-  {objectives.length>0&&<div className="presentation-objectives"><strong>{competence?"Objectifs de la compétence":"Objectifs"}</strong><span>{competence?"À l’issue de cette compétence, vous serez capable de :":"À l’issue de ce contenu, vous serez capable de :"}</span><ol>{objectives.map((o,i)=><li key={i}>{o.replace(/^être capable de\s*/i,"").replace(/^./,c=>c.toUpperCase())}</li>)}</ol></div>}
+  {objectives.length>0&&<div className="presentation-objectives"><strong>{competence?"Objectifs de la compétence":"Objectifs"}</strong><span>{competence?"À l’issue de cette compétence, vous serez capable de :":"À l’issue de ce contenu, vous serez capable de :"}</span><ol>{objectives.map((o,i)=><li key={i}>{o.replace(/^être capable (?:de\s+|d[’'])/i,"").replace(/^./,c=>c.toUpperCase())}</li>)}</ol></div>}
  </header>;
 }
 
@@ -28,13 +28,12 @@ function Branch({section,index}:{section:any;index:number}){
 }
 
 function MindMap({proposal,hideTitle}:{proposal:any;hideTitle?:boolean}){
- const sections=sectionsOf(proposal);const half=Math.ceil(sections.length/2);const center=centerOf(proposal);
+ const sections=sectionsOf(proposal);const center=centerOf(proposal);
  return <div className="visual-presentation">
   <PresentationIntro proposal={proposal} hideTitle={hideTitle}/>
   <div className="mindmap" role="group" aria-label={`Carte mentale : ${center}`}>
-   <div className="mm-side mm-left">{sections.slice(0,half).map((s:any,i:number)=><Branch key={i} section={s} index={i}/>)}</div>
    <div className="mm-center"><small>IDÉE CENTRALE</small><strong>{center}</strong></div>
-   <div className="mm-side mm-right">{sections.slice(half).map((s:any,i:number)=><Branch key={i} section={s} index={i+half}/>)}</div>
+   <div className="mm-branches">{sections.map((s:any,i:number)=><Branch key={i} section={s} index={i}/>)}</div>
   </div>
  </div>
 }
