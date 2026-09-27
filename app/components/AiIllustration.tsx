@@ -24,7 +24,7 @@ export function IllustrationPanel({proposal,onChange,disabled}:{proposal:any;onC
   for(let k=0;k<indexes.length;k++){
    const i=indexes[k];const s=current.sections[i];setBusy(i);setStatus(`Illustration ${k+1}/${indexes.length} · ${s.title}`);
    try{
-    const path=await generateIllustration({title:s.title,items:(s.items||[]).slice(0,4),style,context,brand:fictional?brand.trim():'',fictional:fictional&&!!brand.trim()});
+    const path=await generateIllustration({title:s.title,items:(s.items||[]).slice(0,6),style,context,brand:fictional?brand.trim():'',fictional:fictional&&!!brand.trim()});
     current={...current,sections:current.sections.map((x:any,j:number)=>j===i?{...x,illustration:path}:x)};onChange(current);
    }catch(e){setStatus(e instanceof AiVisionError?e.message:'Illustration impossible. Réessayez.');setBusy(null);return}
   }
