@@ -77,7 +77,7 @@ Deno.serve(async (req) => {
         `Sujet : ${title}.`, items.length ? `Éléments à évoquer : ${items.join(" ; ")}.` : "", context ? `Contexte : ${context}.` : "",
         style ? `Style visuel à respecter, cohérent avec les documents d'origine : ${style}` : "Style : photographie naturelle, douce et professionnelle.",
         fictional ? `L'entreprise fictive « ${brand} » peut apparaître sobrement sur les objets (emballages, enseigne).` : "N'affiche aucun logo, aucune marque ni aucun nom d'entreprise réelle.",
-        "Évite le texte superflu ; si du texte apparaît, il doit être court, lisible et en français. Aucune personne réelle identifiable.",
+        "Évite le texte superflu ; si du texte apparaît, il doit être court, lisible et en français et reprendre uniquement le sujet et les éléments fournis. N'ajoute aucun label, badge, drapeau, slogan ou argument (bio, fabriqué en France, naturel…) absent des éléments fournis. Aucune personne réelle identifiable.",
       ].filter(Boolean).join(" ");
       const model = Deno.env.get("OPENAI_IMAGE_MODEL") || "gpt-image-2.5-flare";
       const ir = await fetch("https://api.openai.com/v1/images/generations", {
