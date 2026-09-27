@@ -1,4 +1,5 @@
 import './visual.css';
+import {AiIllustration} from './AiIllustration';
 const ICONS:Record<string,string>={context:"🧭",skills:"🎯",steps:"🪜",checklist:"✅",product:"📦",target:"👥",warning:"⚠️",resources:"📚",duration:"⏱️",arguments:"💬",level:"📶",timeline:"🗓️"};
 const COLORS=["#72c9ff","#8d55ff","#f0a23b","#6ed66f","#f05285","#3f8cff","#2dd4bf","#e879f9"];
 export const visualLayouts=["mindmap","infographic"];
@@ -9,6 +10,7 @@ function centerOf(p:any){if(typeof p?.center==="string"&&p.center.trim())return 
 
 function Branch({section,index}:{section:any;index:number}){
  return <section className="mm-branch" style={{"--branch":COLORS[index%COLORS.length]} as React.CSSProperties}>
+  <AiIllustration path={section.illustration} alt={section.title}/>
   <h3><span aria-hidden="true">{ICONS[section.type]||"◆"}</span>{section.title}</h3>
   <ul>{section.items.map((x:string,i:number)=><li key={i}>{x}</li>)}</ul>
  </section>
@@ -34,7 +36,7 @@ function Infographic({proposal}:{proposal:any}){
   <header className="ig-head"><small>INFOGRAPHIE</small>{proposal.intro&&<p>{proposal.intro}</p>}</header>
   {metrics.length>0&&<div className="ig-kpis">{metrics.map((m,i)=>{const [lead,rest]=splitMetric(m);return <div className="ig-kpi" key={i} style={{"--branch":COLORS[i%COLORS.length]} as React.CSSProperties}><strong>{lead}</strong>{rest&&<span>{rest}</span>}</div>})}</div>}
   {timeline.length>1&&<ol className="ig-timeline" aria-label="Chronologie">{timeline.map((t,i)=><li key={i}><span aria-hidden="true"/>{t}</li>)}</ol>}
-  <div className="ig-grid">{sections.map((s:any,i:number)=><article className="ig-tile" key={i} style={{"--branch":COLORS[i%COLORS.length]} as React.CSSProperties}><div className="ig-icon" aria-hidden="true">{ICONS[s.type]||"◆"}</div><h3>{s.title}</h3><ul>{s.items.map((x:string,j:number)=><li key={j}>{x}</li>)}</ul></article>)}</div>
+  <div className="ig-grid">{sections.map((s:any,i:number)=><article className="ig-tile" key={i} style={{"--branch":COLORS[i%COLORS.length]} as React.CSSProperties}><AiIllustration path={s.illustration} alt={s.title}/><div className="ig-icon" aria-hidden="true">{ICONS[s.type]||"◆"}</div><h3>{s.title}</h3><ul>{s.items.map((x:string,j:number)=><li key={j}>{x}</li>)}</ul></article>)}</div>
  </div>
 }
 

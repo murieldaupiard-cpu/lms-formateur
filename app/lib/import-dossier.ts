@@ -1,9 +1,16 @@
 import {storeMedia,type SourceDocument} from './media';
+import {readPageWithVision,AiVisionError} from './ai-vision';
 export async function importDossier(files:File[],connected:boolean,status:(message:string)=>void){
  if(files.length>12)throw new Error("Importez au maximum 12 documents par dossier.");
  const documents:SourceDocument[]=[];const chunks:string[]=[];const batch=crypto.randomUUID();
  let worker:any;let pageCount=0;
  const ocr=async(canvas:any)=>{if(!worker){const t=await import('tesseract.js');worker=await t.createWorker('fra+eng')}return (await worker.recognize(canvas)).data.text as string};
+ let visionOff=!connected;
+ // Lecture par l’IA qui voit l’image (colonnes, frises, organigrammes) ; repli sur l’OCR local en cas d’échec ou de quota atteint.
+ const read=async(doc:SourceDocument,image:string,fallback:any,label:string)=>{
+  if(!visionOff){try{status(`Lecture IA de la page · ${label}`);const r=await readPageWithVision(image);if(r.style&&!doc.style)doc.style=r.style;doc.reader='vision';if(r.text.trim())return r.text}catch(e){visionOff=true;status(e instanceof AiVisionError&&e.code==='QUOTA'?`${e.message} Lecture locale utilisée.`:'Lecture IA indisponible · lecture locale utilisée.')}}
+  status(`Lecture OCR · ${label}`);if(!doc.reader)doc.reader='ocr';return ocr(fallback);
+ };
  try{for(let i=0;i<files.length;i++){
   const file=files[i];if(file.size>50*1024*1024)throw new Error(`${file.name} dépasse 50 Mo.`);
   const ext=file.name.split('.').pop()?.toLowerCase()||'';
@@ -19,14 +26,14 @@ export async function importDossier(files:File[],connected:boolean,status:(messa
      const canvas=document.createElement('canvas');canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
      await page.render({canvas,canvasContext:canvas.getContext('2d')!,viewport} as any).promise;
      const tc=await page.getTextContent();let pageText=tc.items.map((x:any)=>x.str||'').join(' ');
-     if(pageText.trim().length<80){status(`Lecture OCR · ${file.name} · page ${n}/${pdf.numPages}`);pageText=await ocr(canvas)}
      const blob=await new Promise<Blob>((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("Image illisible")),'image/jpeg',.85));
      const image=await storeMedia(blob,`${batch}/${id}-page-${n}.jpg`,connected);doc.pages.push({number:n,image});
+     if(pageText.trim().length<80)pageText=await read(doc,image,canvas,`${file.name} · page ${n}/${pdf.numPages}`);else if(!doc.reader)doc.reader='text';
      text+=`\n[${id} — page ${n}]\n${pageText.trim()||"Aucun texte lisible ; consulter le visuel original."}\n`;page.cleanup();canvas.width=0;canvas.height=0;
     }
    }finally{await pdf.destroy()}
   }else if(file.type.startsWith('image/')){
-   text=await ocr(file);doc.pages.push({number:1,image:await storeMedia(file,`${batch}/${id}-image.${ext}`,connected)});
+   const image=await storeMedia(file,`${batch}/${id}-image.${ext}`,connected);doc.pages.push({number:1,image});text=await read(doc,image,file,file.name);
   }else if(['txt','md','csv','html'].includes(ext))text=await file.text();
   else if(ext==='docx'){const m=await import('mammoth');text=(await m.extractRawText({arrayBuffer:await file.arrayBuffer()})).value}
   else if(ext==='pptx'){const JSZip=(await import('jszip')).default;const zip=await JSZip.loadAsync(await file.arrayBuffer());for(const p of Object.keys(zip.files).filter(x=>/^ppt\/slides\/slide\d+\.xml$/.test(x)).sort((a,b)=>Number(a.match(/\d+/)?.[0])-Number(b.match(/\d+/)?.[0]))){const xml=new DOMParser().parseFromString(await zip.file(p)!.async('text'),'application/xml');text+=Array.from(xml.getElementsByTagName('a:t')).map(n=>n.textContent).join(' ')+'\n'}}

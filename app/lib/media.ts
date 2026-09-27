@@ -1,6 +1,6 @@
 export const SUPABASE_URL = "https://jfvmqfxivydihgjcyffq.supabase.co";
 export const SUPABASE_KEY = "sb_publishable_dwSQTgZooCKeXxFCCQMlqw_3QgVMJ62";
-export type SourceDocument = {id:string;name:string;original:string;pages:{number:number;image:string}[]};
+export type SourceDocument = {id:string;name:string;original:string;pages:{number:number;image:string}[];style?:string;reader?:"vision"|"ocr"|"text"};
 let refresh:Promise<string>|null=null;
 export async function sessionToken():Promise<string>{
  const session=JSON.parse(localStorage.getItem("trainer-session")||"null");
