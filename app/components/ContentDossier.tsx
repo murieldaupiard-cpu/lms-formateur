@@ -38,18 +38,36 @@ function quizOf(proposal:any):Question[]{
 }
 
 /** Quiz de fin : une question à la fois dans le même onglet, score, « À retenir », puis résultat. */
-function Quiz({questions,heading,onReview}:{questions:Question[];heading:string;onReview:()=>void}){
+export function Quiz({questions,heading,onReview,reviewLabel="REVOIR LE CONTENU"}:{questions:Question[];heading:string;onReview?:()=>void;reviewLabel?:string}){
  const [index,setIndex]=useState(0);const [picked,setPicked]=useState<number|null>(null);const [score,setScore]=useState(0);const [done,setDone]=useState(false);
  const q=questions[index];const total=questions.length;
  function choose(i:number){if(picked!==null)return;setPicked(i);if(i===q.answer)setScore(s=>s+1)}
  function next(){if(index+1>=total){setDone(true);return}setIndex(index+1);setPicked(null)}
  function restart(){setIndex(0);setPicked(null);setScore(0);setDone(false)}
- if(done){const ratio=score/total;return <div className="cd-quiz-result" role="status"><span>{score} / {total}</span><h3>{ratio>=.8?"Excellent, le contenu est maîtrisé.":ratio>=.5?"Bien joué, encore un petit effort.":"Reprends les onglets avant de réessayer."}</h3><div><button type="button" onClick={restart}>RECOMMENCER</button><button type="button" className="ghost" onClick={onReview}>REVOIR LE CONTENU</button></div></div>}
+ if(done){const ratio=score/total;return <div className="cd-quiz-result" role="status"><span>{score} / {total}</span><h3>{ratio>=.8?"Excellent, le contenu est maîtrisé.":ratio>=.5?"Bien joué, encore un petit effort.":"Reprends les onglets avant de réessayer."}</h3><div><button type="button" onClick={restart}>RECOMMENCER</button>{onReview&&<button type="button" className="ghost" onClick={onReview}>{reviewLabel}</button>}</div></div>}
  return <div className="cd-quiz" key={index}>
   <div className="cd-quiz-head"><div><span>{heading}</span><h3>{q.question}</h3></div><div className="cd-quiz-count"><b>{index+1} / {total}</b><span>SCORE {score}</span></div></div>
   <div className="cd-quiz-progress" aria-hidden="true"><i style={{width:`${((index+(picked!==null?1:0))/total)*100}%`}}/></div>
   <div className="cd-quiz-choices">{q.choices.map((c,i)=><button type="button" key={i} disabled={picked!==null} className={picked===null?"":i===q.answer?"correct":i===picked?"wrong":"muted"} aria-pressed={picked===i} onClick={()=>choose(i)}>{c}</button>)}</div>
   {picked!==null&&<div className="cd-quiz-feedback" aria-live="polite"><div><b>{picked===q.answer?"Bonne réponse":"À retenir"}</b>{q.explanation&&<p>{q.explanation}</p>}{picked!==q.answer&&!q.explanation&&<p>La bonne réponse était : {q.choices[q.answer]}</p>}</div><button type="button" onClick={next}>{index+1>=total?"VOIR MON RÉSULTAT →":"QUESTION SUIVANTE →"}</button></div>}
+ </div>;
+}
+
+/** Familles de savoir-faire d’un REAC (techniques, organisationnels, relationnels…) : affichées en sous-onglets plutôt qu’en colonnes. */
+function isSkillFamilies(groups:Group[],context=""){const family=/savoir|techniques?|organisationnel|relationnel|comportement/i;return groups.length>=2&&groups.length<=6&&(/savoir/i.test(context)?true:groups.every(g=>family.test(g.title)))}
+function SubTabs({groups}:{groups:Group[]}){
+ const [active,setActive]=useState(0);const base=useId();const g=groups[Math.min(active,groups.length-1)];
+ return <div className="cd-subtabs">
+  <div className="cd-subtabs-nav" role="tablist" aria-label="Familles de savoir-faire">{groups.map((x,i)=><button type="button" role="tab" key={i} id={`${base}-${i}`} aria-selected={i===active} aria-controls={`${base}-panel`} className={i===active?"active":""} onClick={()=>setActive(i)}><span>{x.title}</span><b>{x.items.length}</b></button>)}</div>
+  <div className="cd-subtabs-panel" role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-${active}`}>{g.subtitle&&<p>{g.subtitle}</p>}{g.items.length>0&&<ol>{g.items.map((x,j)=><li key={j}>{x}</li>)}</ol>}</div>
+ </div>;
+}
+
+/** Évaluation importée par le formateur : même présentation que le quiz de fin des cours / ressources. */
+export function QuizDossier({title,questions,color,kicker,onExit}:{title:string;questions:Question[];color?:string;kicker?:string;onExit?:()=>void}){
+ return <div className="cdossier" style={{"--accent":color||"#E0A05A"} as React.CSSProperties}>
+  <div className="cd-intro"><div><span>{kicker||"ÉVALUATION"}</span><h1>{title||"Évaluation"}</h1></div><div className="cd-badge"><b>{questions.length}</b><span>QUESTION{questions.length>1?"S":""}</span></div></div>
+  <div className="cd-panel"><section><Quiz questions={questions} heading="ÉVALUATION · TESTEZ VOS CONNAISSANCES" onReview={onExit} reviewLabel="RETOUR AU PARCOURS"/></section></div>
  </div>;
 }
 
@@ -93,7 +111,7 @@ export default function ContentDossier({proposal,color,kicker,label="DOSSIER",ac
     </div>
     {tab.facts.length>0&&<div className="cd-facts">{tab.facts.map((f,i)=><article key={i}><strong>{f.value}</strong><span>{f.label}</span></article>)}</div>}
     {tab.timeline.length>0&&<div className="cd-timeline">{tab.timeline.map((t,i)=><article key={i}><strong>{t.date}</strong><p>{t.text}</p></article>)}</div>}
-    {tab.groups.length>0&&<div className="cd-groups">{tab.groups.map((g,i)=><article key={i}><h3>{g.title}</h3>{g.subtitle&&<small>{g.subtitle}</small>}{g.items.length>0&&<ul>{g.items.map((x,j)=><li key={j}>{x}</li>)}</ul>}</article>)}</div>}
+    {tab.groups.length>0&&(isSkillFamilies(tab.groups,`${tab.title} ${tab.heading}`)?<SubTabs key={current} groups={tab.groups}/>:<div className="cd-groups">{tab.groups.map((g,i)=><article key={i}><h3>{g.title}</h3>{g.subtitle&&<small>{g.subtitle}</small>}{g.items.length>0&&<ul>{g.items.map((x,j)=><li key={j}>{x}</li>)}</ul>}</article>)}</div>)}
     {tab.items.length>0&&<ul className="cd-list">{tab.items.map((x,i)=><li key={i}>{x}</li>)}</ul>}
     {tab.callout&&<div className="cd-callout"><b>{tab.callout.title||"À retenir"}</b><span>{tab.callout.text}</span></div>}
     {images.length>1||(images[0]?.pages.length??0)>1?<div className="cd-gallery">{images.flatMap(d=>d.pages.map(p=>({d,p}))).slice(1).map(({d,p})=><PageImage key={p.image} path={p.image} label={`${d.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')} · page ${p.number}`}/>)}</div>:null}

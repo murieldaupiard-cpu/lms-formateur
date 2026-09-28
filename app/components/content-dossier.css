@@ -94,3 +94,17 @@
 .cd-quiz-result h3{margin:0;color:#fff;font:500 clamp(22px,3vw,30px) Georgia,serif}
 .cd-quiz-result div{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 @media (max-width:640px){.cd-quiz-head{flex-direction:column}.cd-quiz-count{justify-items:start;grid-auto-flow:column;align-items:center}.cd-quiz-feedback{flex-direction:column;align-items:stretch}}
+
+/* Sous-onglets (familles de savoir-faire d’un REAC) */
+.cd-subtabs{display:grid;gap:14px;min-width:0}
+.cd-subtabs-nav{display:flex;flex-wrap:wrap;gap:8px;padding:6px;border:1px solid var(--line);border-radius:14px;background:#0b1526}
+.cd-subtabs-nav button{cursor:pointer;flex:1 1 180px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);font-size:12px;font-weight:900;text-align:left;transition:background .2s,border-color .2s,color .2s}
+.cd-subtabs-nav button:hover{border-color:var(--a);color:#fff}
+.cd-subtabs-nav button.active{border-color:var(--a);background:var(--a-soft);color:#fff}
+.cd-subtabs-nav b{flex:none;min-width:26px;padding:3px 7px;border-radius:99px;background:var(--line);color:var(--a-text);font-size:11px;text-align:center}
+.cd-subtabs-nav button:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.cd-subtabs-panel{display:grid;gap:10px;animation:cd-quiz-in .25s ease}
+.cd-subtabs-panel>p{margin:0;color:var(--muted);font-size:13px}
+.cd-subtabs-panel ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:10px;counter-reset:sf}
+.cd-subtabs-panel li{counter-increment:sf;position:relative;padding:13px 14px 13px 48px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:#c9d4df;font-size:14px;line-height:1.55}
+.cd-subtabs-panel li::before{content:counter(sf,decimal-leading-zero);position:absolute;left:14px;top:13px;color:var(--a-text);font:500 14px Georgia,serif}
