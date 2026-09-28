@@ -1,5 +1,7 @@
 /* Menu principal en cartes (même esprit que les cartes séquence) et tableau de bord. */
-.home-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.home-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media(max-width:1000px){.home-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.home-cards{grid-template-columns:1fr}}
 .home-card{--seq:#7c3aed;appearance:none;display:flex;flex-direction:column;min-height:330px;padding:0;border:1px solid #263b51;border-radius:16px;overflow:hidden;background:#0d2034;color:#fff;text-align:left;font:inherit;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}
 .home-card:hover{transform:translateY(-6px);border-color:var(--seq);box-shadow:0 18px 38px #0006}
 .home-card:focus-visible{outline:3px solid var(--seq);outline-offset:3px}
